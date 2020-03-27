@@ -16,6 +16,7 @@
 		3852F805230EE73100082B31 /* flickr.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3852F804230EE73100082B31 /* flickr.gif */; };
 		385811AD23BB7537002CC9B0 /* FLPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385811AC23BB7537002CC9B0 /* FLPageControl.swift */; };
 		385811AF23BBA947002CC9B0 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385811AE23BBA947002CC9B0 /* GradientView.swift */; };
+		385F7F15242D903D004CCB88 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385F7F14242D903D004CCB88 /* TabView.swift */; };
 		38607DAD231973F800153383 /* ImageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38607DAC231973F800153383 /* ImageProcess.swift */; };
 		38607DAF23198A9000153383 /* ImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38607DAE23198A9000153383 /* ImageEngine.swift */; };
 		3877A9F422E2094B007FBCE3 /* AddCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3877A9F322E2094B007FBCE3 /* AddCommentVC.swift */; };
@@ -162,6 +163,7 @@
 		3852F804230EE73100082B31 /* flickr.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = flickr.gif; sourceTree = "<group>"; };
 		385811AC23BB7537002CC9B0 /* FLPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLPageControl.swift; sourceTree = "<group>"; };
 		385811AE23BBA947002CC9B0 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		385F7F14242D903D004CCB88 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		38607DAC231973F800153383 /* ImageProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageProcess.swift; path = ../../../../../../../../System/Volumes/Data/Users/codesworth/Development/Boston/Floq/Floq/Floq/Frameworks/ImageProcess.swift; sourceTree = "<group>"; };
 		38607DAE23198A9000153383 /* ImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageEngine.swift; path = ../../../../../../../../System/Volumes/Data/Users/codesworth/Development/Boston/Floq/Floq/Floq/Engine/ImageEngine.swift; sourceTree = "<group>"; };
 		3877A9F322E2094B007FBCE3 /* AddCommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentVC.swift; sourceTree = "<group>"; };
@@ -718,6 +720,7 @@
 				3852F802230ED91200082B31 /* PhotoEmptyView.swift */,
 				38DD338E233D52B100C11C78 /* Tests.swift */,
 				385811AE23BBA947002CC9B0 /* GradientView.swift */,
+				385F7F14242D903D004CCB88 /* TabView.swift */,
 			);
 			name = Views;
 			path = "New Group";
@@ -1170,6 +1173,7 @@
 				40AA29B71E8891E900200A3F /* AppDelegate.swift in Sources */,
 				C41EBFB021E145430094EBC6 /* LoginVC.swift in Sources */,
 				C4A2A42E21A22BBE006DFE6E /* BaseButton.swift in Sources */,
+				385F7F15242D903D004CCB88 /* TabView.swift in Sources */,
 				C4A2A42821A22B37006DFE6E /* FLUser.swift in Sources */,
 				C4D1E08C21D794D400C5ED9A /* NearbyCliqsVC.swift in Sources */,
 				38D007C823BA742E001899A0 /* RootEntryVC.swift in Sources */,
