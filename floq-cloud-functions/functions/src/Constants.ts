@@ -2,6 +2,7 @@ export const REF_FLOQS = "FLFLOQs";
 export const REF_PHOTOS = "Photos";
 export const REF_FLPHOTOS = "FLPHOTOS";
 export const REF_COMMENTS = "FLComments";
+export const REF_MESSAGEBOARD = "FLCliqMessageBoard";
 export const REF_TOKENS = "FLTOKENS";
 export const REF_USERS = "FLUSER";
 export const FIELD_CLIQ_ID = "cliqID";
