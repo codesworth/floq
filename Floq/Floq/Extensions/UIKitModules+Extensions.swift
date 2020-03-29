@@ -279,6 +279,16 @@ extension UIScreen{
         case lowly
     }
     
+    var hasNotch:Bool{
+        let handle = screenType()
+        switch handle {
+        case .xmax_xr,.xs_x:
+            return true
+        default:
+            return false
+        }
+    }
+    
     func screenType()->Handle{
         let height = UIScreen.main.bounds.height
         

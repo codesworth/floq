@@ -23,10 +23,20 @@ import FirebaseAuth
 
 final class PhotosVC: UIViewController {
     
-    var isMyPhotos = false
+    var isMyPhotos = false{
+        didSet{
+            if isMyPhotos{
+                deleteButton.isHidden = false
+            }
+        }
+    }
+    
+    var isSingleDetail = false
+    var detailUserId:String?
+    
+    
     var data: [GridPhotoItem] = []
     var photosToDelete:Set<String> = []
-    private var floaty:Floaty!
     private var cliq:FLCliqItem?
     private var cliqID:String!
     var photoEngine:PhotosEngine!
@@ -38,6 +48,27 @@ final class PhotosVC: UIViewController {
     
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    lazy var tabBar:TabView = {
+        let tab = TabView(frame: .zero)
+        return tab
+    }()
+    
+    lazy var sideBar:PhotoSideBar = {[unowned self] in
+        return PhotoSideBar(frame: CGRect(x:UIScreen.width + 64, y:0, width: UIScreen.width * 0.4, height: UIScreen.height - (UIScreen.main.hasNotch ? 160 : 120)))
+        }()
+    
+    lazy var deleteButton:UIButton = { [unowned self] in
+        let but = UIButton(frame: .zero)
+        but.setImage(#imageLiteral(resourceName: "trash"), for: .normal)
+        but.backgroundColor = .deepRose
+        but.contentMode = .scaleAspectFit
+        but.addTarget(self, action: #selector(deletePhotos), for: .touchUpInside)
+        but.isHidden = true
+        but.dropCorner(30)
+        but.dropShadow(4, color: .black, 0.4, CGSize(width: 0, height: 3))
+        return but
+        }()
     
     var userlistbutt:AvatarImageView!
     
@@ -58,18 +89,6 @@ final class PhotosVC: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         subscribeTo(subscription: .invalidatePhotos, selector: #selector(invalidatePhoto(_:)))
         collectionView.backgroundColor = .globalbackground
-        floaty = Floaty()
-        floaty.fabDelegate = self
-        if isMyPhotos{
-            floaty.buttonImageView.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-            floaty.buttonImage = UIImage(named: "trashx")
-            floaty.buttonColor = .deepRose
-            floaty.isHidden = true
-        }else{
-            floaty.buttonColor = .seafoamBlue
-            floaty.plusColor = .white
-        }
-        
         if cliq == nil{
             DataService.main.getCliq(id: cliqID) { (cliq, err) in
                 if let cliq = cliq{
@@ -81,22 +100,24 @@ final class PhotosVC: UIViewController {
             }
         }
         navigationItem.hidesBackButton = false
-          navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         view.addSubview(collectionView)
-        
-        
+        view.addSubview(sideBar)
+        view.addSubview(tabBar)
         adapter.collectionView = collectionView
         adapter.dataSource = self
         adapter.scrollViewDelegate = self
-        view.addSubview(floaty)
-        photoEngine.watchForPhotos(cliqDocumentID:cliqID, for:isMyPhotos ? UserDefaults.uid : nil) { (success, errm) in
+        view.addSubview(deleteButton)
+        
+        photoEngine.watchForPhotos(cliqDocumentID:cliqID, for:detailUserId) { (success, errm) in
             if success{
                 self.canShowEmpty = true
                 self.adapter.reloadData(completion: nil)
                 
             }
         }
-        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_nav_menu"), style: .plain, target: self, action: #selector(menuTapped(_:)))
+        setupTabActions()
     }
     
     @objc func invalidatePhoto(_ notification:Notification){
@@ -118,58 +139,103 @@ final class PhotosVC: UIViewController {
         adapter.reloadData(completion: nil)
     }
     
-    
-    func setupViewForMyphotos(){
-        let barbutton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectPhotos(_:)))
-        barbutton.setTitleTextAttributes([.font:UIFont.systemFont(ofSize: 18, weight: .light), .foregroundColor:UIColor(red: 53/255, green: 125/255, blue: 237/255, alpha: 1)], for: .normal)
-        navigationItem.rightBarButtonItem = barbutton
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        title = ""
     }
     
-    @objc func selectPhotos(_ sender:UIBarButtonItem){
+    @objc func menuTapped(_ sender:UIBarButtonItem){
+        sideBar.toggleSideBar()
+    }
+    
+    
+    func setupTabActions(){
         
-        if isSelecting{
-            sender.title = "Select"
-            floaty.isHidden = true
-            isSelecting = !isSelecting
-            Subscription.main.post(suscription: .clearSelection, object: nil)
-            floaty.buttonColor = .seafoamBlue
-            floaty.plusColor = .white
-            
-        }else{
-            sender.title = "Done"
-            isSelecting = !isSelecting
-            Subscription.main.post(suscription: .cellShakeAnim, object: nil)
-            floaty.isHidden = false
+        tabBar.actionForHomeIcon = {
+            self.navigationController?.popToRootViewController(animated: true)
         }
+        
+        tabBar.actionForImageIcon = {
+            self.cameraTabSelected()
+        }
+        
+        tabBar.actionForCommentIcon = {
+            let vc = CommentsVC(id: self.cliqID, UIScreen.main.hasNotch,cliqID: self.cliqID, isMessageBoard: true)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        sideBar.actionForAccountButton = {
+            if let vc = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: UserProfileVC.self)) as? UserProfileVC{
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+        
+        sideBar.actionForDeleteButton = {
+            self.isMyPhotos = true
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(self.selectPhotosDone))
+            self.isSelecting = true
+            Subscription.main.post(suscription: .cellShakeAnim, object: nil)
+            
+        }
+        
+        sideBar.actionForDetailButton = {
+            self.userlistTapped()
+        }
+        
+        sideBar.actionForLogoutButton = {
+            self.logout()
+        }
+    }
+    
+    
+    @objc func selectPhotosDone(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_nav_menu"), style: .plain, target: self, action: #selector(menuTapped(_:)))
+        isSelecting = false
+        isMyPhotos = false
+        Subscription.main.post(suscription: .clearSelection, object: nil)
+        deleteButton.isHidden = true
+        
     }
     
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView.frame = view.bounds
-        if isMyPhotos{
-            setupViewForMyphotos()
-        }else{
-            userlistbutt = AvatarImageView(frame:CGRect(origin: .zero, size: CGSize(width: 25, height: 25)))
-            userlistbutt.setAvatar(uid: cliq?.creatorUid ?? "placeholder")
-            let uiview = UIView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
-            let tp = UITapGestureRecognizer(target: self, action: #selector(userlistTapped))
-            tp.numberOfTapsRequired = 1
-            uiview.addGestureRecognizer(tp)
-            uiview.addSubview(userlistbutt)
-            navigationItem.rightBarButtonItem = UIBarButtonItem(customView: uiview)
+        tabBar.layout{
+            $0.leading == view.leadingAnchor
+            $0.trailing == view.trailingAnchor
+            $0.bottom == view.bottomAnchor
+            $0.height |=| (UIScreen.main.hasNotch ? 80 : 60)
         }
+        collectionView.layout{
+            $0.leading == view.leadingAnchor
+            $0.trailing == view.trailingAnchor
+            $0.top == view.topAnchor
+            $0.bottom == tabBar.topAnchor
+        }
+        
+        deleteButton.layout{
+            $0.bottom == tabBar.topAnchor - 16
+            $0.trailing == view.trailingAnchor - 16
+            $0.height |=| 60
+            $0.width |=| 60
+        }
+        
+        deleteButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         
     }
     
-
+    
     @objc func userlistTapped(){
-        let list = photoEngine.getAllPhotoMetadata()
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
-        if let vc = storyboard.instantiateViewController(withIdentifier: String(describing: UserListVC.self)) as? UserListVC{
-            vc.list = list
-            vc.cliq = cliq
-            navigationController?.pushViewController(vc, animated: true)
+        if isSingleDetail{
+            navigationController?.popViewController(animated: true)
+        }else{
+            let list = photoEngine.getAllPhotoMetadata()
+            let storyboard = UIStoryboard(name: "Main", bundle: .main)
+            if let vc = storyboard.instantiateViewController(withIdentifier: String(describing: UserListVC.self)) as? UserListVC{
+                vc.list = list
+                vc.cliq = cliq
+                navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
     
@@ -184,7 +250,7 @@ final class PhotosVC: UIViewController {
             
         }
         pickerController.didSelectAssets = { (assets: [DKAsset]) in
-           
+            
             if assets.isEmpty{
                 
                 return
@@ -235,6 +301,26 @@ final class PhotosVC: UIViewController {
         })
     }
     
+    func logout(){
+        let alert = UIAlertController.createDefaultAlert("Log Out", "You are about to logout from your account",.alert, "Cancel",.default, nil)
+        let action = UIAlertAction(title: "Logout", style: .destructive) { (ac) in
+            
+            Auth.logout { (success, err) in
+                
+                if success{
+                    let onboard = UIStoryboard.main.instantiateViewController(withIdentifier: RootEntryVC.identifier) as! RootEntryVC
+                    onboard.modalPresentationStyle = .fullScreen
+                    self.present(onboard, animated: true, completion: nil)
+                    
+                }else{
+                    self.present(UIAlertController.createDefaultAlert("🚨🚨 Error 🚨🚨", err ?? "Unknown Error",.alert, "OK",.default, nil), animated: true, completion: nil)
+                }
+            }
+        }
+        
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 
@@ -308,9 +394,9 @@ extension PhotosVC:GridPhotoSectionDelegate{
 }
 
 
-extension PhotosVC:FloatyDelegate{
+extension PhotosVC{
     
-    func emptyFloatySelected(_ floaty: Floaty) {
+    @objc func deletePhotos() {
         if isMyPhotos && isSelecting{
             if !photosToDelete.isEmpty{
                 let loader = LoaderView(frame: UIScreen.main.bounds)
@@ -322,18 +408,12 @@ extension PhotosVC:FloatyDelegate{
                     self.view.addSubview(loader)
                     self.photoEngine.deletePhotos(ids: self.photosToDelete) { [weak self] success in
                         guard let self = self else {return}
-                        let sender = self.navigationItem.rightBarButtonItem ?? UIBarButtonItem()
-                        loader.removeFromSuperview()
-                        sender.title = "Select"
-                        floaty.isHidden = true
-                        self.isSelecting = !self.isSelecting
+                        self.selectPhotosDone()
                         Subscription.main.post(suscription: .clearSelection, object: nil)
-                        floaty.buttonColor = .seafoamBlue
-                        floaty.plusColor = .white
                         if success{
                             SnackBar.makeSncakMessage(text:"\(photoString) deleted successfully")
                             self.photosToDelete.removeAll()
-                           
+                            
                         }else{
                             SnackBar.makeSncakMessage(text: "Failed to delete \(photoString)", color: .deepRose)
                         }
@@ -345,6 +425,12 @@ extension PhotosVC:FloatyDelegate{
             }
             return
         }
+        
+    }
+    
+    
+    func cameraTabSelected() {
+        
         if let cliq = self.cliq{
             if cliq.isMember(){
                 selectPhoto()

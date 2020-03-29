@@ -53,9 +53,9 @@ class UserListVC: UITableViewController {
             let user = users[indexPath.row]
             let listed = list[user.uid]
             cell.configure(id: user.uid, name: user.username, count:listed?.1 ?? 0)
-            if indexPath.row == 0{
-                cell.accessoryType = .disclosureIndicator
-            }
+            
+            cell.accessoryType = .disclosureIndicator
+            
             return cell
         }
 
@@ -128,11 +128,17 @@ class UserListVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = users[indexPath.row]
-        if user.uid == UserDefaults.uid{
-            let vc = PhotosVC(cliq: cliq, id:cliq.id)
-            vc.isMyPhotos = true
-            self.navigationController?.pushViewController(vc, animated: true)
+        //if user.uid == UserDefaults.uid{
+        guard let _  = list[user.uid] else {
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
         }
+        
+        let vc = PhotosVC(cliq: cliq, id:cliq.id)
+        vc.isSingleDetail = true
+        vc.detailUserId = user.uid
+        self.navigationController?.pushViewController(vc, animated: true)
+       // }
     }
 
     /*

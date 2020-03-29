@@ -11,11 +11,12 @@ import UIKit
 class CommentsVC: UIViewController {
     
     private lazy var tableView:UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
+        let table = UITableView(frame: .zero, style: .grouped)
         table.backgroundColor = .clear
-        table.separatorStyle = .none
+        table.separatorStyle = .singleLine
         table.isScrollEnabled = true
         table.alwaysBounceVertical = true
+        table.register(UINib(nibName: CommentAlternateCell.Identifier, bundle: nil), forCellReuseIdentifier: CommentAlternateCell.Identifier)
         table.register(UINib(nibName: "\(CommentCell.self)", bundle: nil), forCellReuseIdentifier: "\(CommentCell.self)")
         table.register(UINib(nibName: "\(LoadMoreCells.self)", bundle: nil), forCellReuseIdentifier: "\(LoadMoreCells.self)")
         return table
@@ -25,6 +26,7 @@ class CommentsVC: UIViewController {
     private var cliqID:String!
     private var tap:UITapGestureRecognizer?
     var photoID:String!
+    var isMessageBoard = false
     private var engine: CommentEngine!
     var exhausted = false
     var hasNotch:Bool = false
@@ -37,15 +39,7 @@ class CommentsVC: UIViewController {
         }
     }
     
-//    private lazy var commentView:UIButton = { [unowned self] by in
-//       let view = UIButton(frame: .zero)
-//        view.backgroundColor = .seafoamBlue
-//        view.addTarget(self, action: #selector(commentPressed(_:)), for: .touchUpInside)
-//        view.titleLabel?.font = .systemFont(ofSize: 18, weight: .regular)
-//        view.setTitleColor(.white, for: .normal)
-//        view.setTitle("Add Comment", for: .normal)
-//        return view
-//    }(())
+    
     
     private lazy var commentTextBox:UITextField = {
         let textField = UITextField(frame: .zero)
@@ -66,9 +60,10 @@ class CommentsVC: UIViewController {
     
     private var mock:Comment.MockData = Comment.MockData()
     
-    init(id:String, _ hasNotch:Bool, cliqID:String){
+    init(id:String, _ hasNotch:Bool, cliqID:String,isMessageBoard:Bool){
         super.init(nibName: nil, bundle: nil)
         photoID = id
+        self.isMessageBoard = isMessageBoard
         self.hasNotch = hasNotch
         self.cliqID = cliqID
     }
@@ -79,9 +74,9 @@ class CommentsVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Comments"
+        title = isMessageBoard ? "Message Board" : "Comments"
         App.setDomain(.Comment)
-        engine = CommentEngine(photo: photoID)
+        engine = CommentEngine(photoOrCliq: photoID, isMessageBoard: isMessageBoard)
         view.backgroundColor = .white
         view.addSubview(tableView)
         view.addSubview(commentInput)
@@ -95,6 +90,7 @@ class CommentsVC: UIViewController {
         tap = UITapGestureRecognizer(target: self, action: #selector(tapped(_:)))
         tap?.numberOfTapsRequired = 1
         view.addGestureRecognizer(tap!)
+        navigationItem.backBarButtonItem?.title = ""
         // Do any additional setup after loading the view.
     }
     
@@ -208,15 +204,7 @@ extension CommentsVC:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if engine.comments.isEmpty{
-//            let view = UIView(frame: .zero)
-//            view.backgroundColor = .white
-//            let activity = UIActivityIndicatorView(frame: CGRect(origin: .zero, size: CGSize(width: 50, height: 50)))
-//            activity.style = .whiteLarge
-//            activity.tintColor = .seafoamBlue
-//            view.addSubview(activity)
-//            tableView.backgroundView = view
-//            activity.center = view.center
-//            activity.startAnimating()
+
             let lable = UILabel(frame: tableView.frame)
             lable.text = "Be the first to comment..."
             lable.textAlignment = .center
@@ -240,11 +228,22 @@ extension CommentsVC:UITableViewDelegate,UITableViewDataSource{
                 return cell
             }
         }
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "\(CommentCell.self)", for: indexPath) as? CommentCell{
-            let comment = engine.comments[indexPath.row]
-            cell.configure(comment)
-            return cell
+        
+        let comment = engine.comments[indexPath.row]
+        if comment.commentorID != UserDefaults.uid{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "\(CommentCell.self)", for: indexPath) as? CommentCell{
+                
+                cell.configure(comment)
+                return cell
+            }
+        }else{
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "\(CommentAlternateCell.self)", for: indexPath) as? CommentAlternateCell{
+                
+                cell.configure(comment)
+                return cell
+            }
         }
+        
         return CommentCell()
     }
     
@@ -258,6 +257,14 @@ extension CommentsVC:UITableViewDelegate,UITableViewDataSource{
         return txtheight + 40
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == engine.comments.endIndex{
             if let cell = tableView.cellForRow(at: indexPath) as? LoadMoreCells{
@@ -266,6 +273,7 @@ extension CommentsVC:UITableViewDelegate,UITableViewDataSource{
             }
         }
     }
+    
 }
 
 

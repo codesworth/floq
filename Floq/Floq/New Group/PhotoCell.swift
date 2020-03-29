@@ -10,7 +10,7 @@ import UIKit
 import FirebaseStorage
 import SDWebImage
 
-class PhotoCell: UICollectionViewCell, Identity {
+class PhotoCell: UICollectionViewCell {
 
     @IBOutlet weak var selectedCheck: UIImageView!
     @IBOutlet weak var alertIcon: UIView!
@@ -18,7 +18,9 @@ class PhotoCell: UICollectionViewCell, Identity {
     let notifier = CommentNotificationEngine()
     private var uuid = UUID()
     var itemSelected:Bool = false
+    private var isShaking = false
     private var photoID:String?
+    var photoOwnerId:String!
     override func awakeFromNib() {
         super.awakeFromNib()
         subscribeTo(subscription: .newHighlight, selector: #selector(canHighlight(_:)))
@@ -43,10 +45,17 @@ class PhotoCell: UICollectionViewCell, Identity {
         super.prepareForReuse()
         alertIcon.isHidden = true
         imageView.image = nil
+        if isShaking{
+            stopShakeAnim()
+            isShaking = true
+        }
+        
     }
     
     
     @objc func performTheShake(){
+        isShaking = true
+        guard UserDefaults.uid == photoOwnerId else {return}
         let animation = CABasicAnimation(keyPath: "transform")
         animation.fromValue = NSValue(caTransform3D: CATransform3DMakeRotation(.Angle(-3), 0, 0, 1.0))
         animation.toValue = NSValue(caTransform3D: CATransform3DMakeRotation(.Angle(3), 0, 0, 1.0))
@@ -59,11 +68,14 @@ class PhotoCell: UICollectionViewCell, Identity {
     }
     
     @objc func stopShakeAnim(){
+        
+        isShaking = false
         layer.removeAnimation(forKey: Self.Identifier)
     }
     
     
     func setSeleted(){
+        guard photoOwnerId == UserDefaults.uid else {return}
         itemSelected = !itemSelected
         selectedCheck.isHidden = !itemSelected
         
@@ -75,7 +87,8 @@ class PhotoCell: UICollectionViewCell, Identity {
         stopShakeAnim()
     }
     
-    func configureCell(ref:StorageReference,photoID:String){
+    func configureCell(ref:StorageReference,photoID:String, owner:String){
+        self.photoOwnerId = owner
         self.photoID = photoID
         //imageView.sd_setImage(with: ref, placeholderImage:nil)
         notify(photoID)
@@ -87,13 +100,9 @@ class PhotoCell: UICollectionViewCell, Identity {
                 //print("Image Thumb sixe: \(image.byteSize)")
             }
         }
-        //imageView.loadImagewith(ref: ref)
-//        DispatchQueue.global().async {
-//            let process = ImageProcess(ref: ref, size: size)
-//            process.delegate = self
-//        }
-        
-    
+        if isShaking{
+            performTheShake()
+        }
     }
     
     
@@ -112,11 +121,7 @@ class PhotoCell: UICollectionViewCell, Identity {
         if id == pid{
             notify(id)
         }
-//        if (UIApplication.shared.delegate as? AppDelegate)?.mainEngine.canHiglight(photo: id) ?? false{
-//            alertIcon.isHidden = false
-//        }else{
-//            alertIcon.isHidden = true
-//        }
+
     }
     
     deinit {

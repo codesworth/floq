@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommentAlternateCell" rowHeight="133" id="5ZS-Jm-idz" customClass="CommentAlternateCell" customModule="Floq" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="133"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5ZS-Jm-idz" id="0f6-9m-cJR">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="133"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qMM-nT-B7f">
+                        <rect key="frame" x="274" y="15" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="J0c-a1-s46"/>
+                            <constraint firstAttribute="height" constant="30" id="xHj-IB-Nwc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kaimon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMQ-Xg-FH6">
+                        <rect key="frame" x="223" y="8" width="43" height="15"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                        <color key="textColor" red="0.30588235289999999" green="0.80392156859999997" blue="0.76862745099999996" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOc-rx-pi6">
+                        <rect key="frame" x="16" y="31" width="246" height="78"/>
+                        <string key="text">I’ve always been fascinated by how computers work.. I mean down to the most fundamental core... The silicon transistors and the brilliant design behind the architecture of using the </string>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="highlightedColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4f9-QC-bDx">
+                        <rect key="frame" x="16" y="8" width="14" height="11"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="9"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OMQ-Xg-FH6" firstAttribute="top" secondItem="0f6-9m-cJR" secondAttribute="top" constant="8" id="4z8-GN-UWO"/>
+                    <constraint firstItem="qMM-nT-B7f" firstAttribute="leading" secondItem="OMQ-Xg-FH6" secondAttribute="trailing" constant="8" id="Pqc-P9-K7l"/>
+                    <constraint firstItem="4f9-QC-bDx" firstAttribute="leading" secondItem="0f6-9m-cJR" secondAttribute="leading" constant="16" id="Ygi-5c-2Pv"/>
+                    <constraint firstAttribute="trailing" secondItem="qMM-nT-B7f" secondAttribute="trailing" constant="16" id="b0J-dC-4ua"/>
+                    <constraint firstItem="qMM-nT-B7f" firstAttribute="leading" secondItem="mOc-rx-pi6" secondAttribute="trailing" constant="12" id="fLO-ww-l00"/>
+                    <constraint firstItem="mOc-rx-pi6" firstAttribute="leading" secondItem="0f6-9m-cJR" secondAttribute="leading" constant="16" id="gHM-so-lcx"/>
+                    <constraint firstItem="4f9-QC-bDx" firstAttribute="top" secondItem="0f6-9m-cJR" secondAttribute="top" constant="8" id="l1q-7H-Tp8"/>
+                    <constraint firstItem="mOc-rx-pi6" firstAttribute="top" secondItem="OMQ-Xg-FH6" secondAttribute="bottom" constant="8" id="nr3-VR-WBq"/>
+                    <constraint firstItem="qMM-nT-B7f" firstAttribute="top" secondItem="0f6-9m-cJR" secondAttribute="top" constant="15" id="yw4-Zw-t8G"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <viewLayoutGuide key="safeArea" id="v0r-NR-ZXK"/>
+            <connections>
+                <outlet property="commentlable" destination="mOc-rx-pi6" id="QpT-cn-B35"/>
+                <outlet property="profileImageView" destination="qMM-nT-B7f" id="xcJ-7f-3V9"/>
+                <outlet property="timelbl" destination="4f9-QC-bDx" id="MFa-UF-N34"/>
+                <outlet property="usernameLabel" destination="OMQ-Xg-FH6" id="HAc-gO-zIK"/>
+            </connections>
+            <point key="canvasLocation" x="136.23188405797103" y="202.56696428571428"/>
+        </tableViewCell>
+    </objects>
+</document>

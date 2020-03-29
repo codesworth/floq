@@ -211,7 +211,7 @@ class PhotoFullScreenVC: UIViewController {
         }
         
         guard let id = currentPhotoID else {return}
-        let vc = CommentsVC(id: id, (self._AREA_INSET > 1) ? true : false,cliqID: cliqID)
+        let vc = CommentsVC(id: id, (self._AREA_INSET > 1) ? true : false,cliqID: cliqID, isMessageBoard: false)
         navigationController?.pushViewController(vc, animated: true)
         selectedIndex = Int.largest
     }
@@ -247,7 +247,7 @@ class PhotoFullScreenVC: UIViewController {
             self.likebar.isHidden = true
             //self.avatarImageview.transform.scaledBy(x: 1.5, y: 1.5)
         }, completion: { _ in
-            let vc = CommentsVC(id:self.currentPhotoID!,(self._AREA_INSET > 1) ? true : false,cliqID: self.cliqID)
+            let vc = CommentsVC(id:self.currentPhotoID!,(self._AREA_INSET > 1) ? true : false,cliqID: self.cliqID, isMessageBoard: false)
             vc.view.frame.size = self.commentContainer.frame.size
             self.add(vc, to: self.commentContainer)
         })

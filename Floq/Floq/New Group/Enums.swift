@@ -54,6 +54,7 @@ enum References:String{
     case likes = "LIKES"
     case requestLikeShard = "LikesShard"
     case comment = "FLComments"
+    case messageBoard = "FLCliqMessageBoard"
     case commentSubscription = "FLCommentSubscriptions"
     case commentNotifier = "FLCliqCommentSubscriptions"
     

@@ -17,17 +17,25 @@ class CommentEngine:NSObject{
     
     private var _QUERY_LIMIT = 20
     private var _internalComments:Comments = []
-    private var photoId:String
+    private var photoOrCliqId:String
     private var lastSnapshot:DocumentSnapshot?
     private var listener:ListenerRegistration?
-    private var commentsCollection:CollectionReference{
+    private var isMessageBoard = false
+    
+    
+    private var messageBoard:CollectionReference{
+        if isMessageBoard{
+            return Firestore.database.collection(.messageBoard)
+        }
         return Firestore.database.collection(.comment)
     }
     
+    
     var exhausted = false
     
-    init(photo id:String) {
-        photoId = id
+    init(photoOrCliq id:String,isMessageBoard:Bool) {
+        photoOrCliqId = id
+        self.isMessageBoard = isMessageBoard
         super.init()
         
     }
@@ -45,12 +53,12 @@ class CommentEngine:NSObject{
     
     func watchForComments(completion:@escaping Completion){
         let query:Query
-        
+        let field = isMessageBoard ? Comment.Keys.cliqID.rawValue : Comment.Keys.photoID.rawValue
         if _internalComments.isEmpty{
-            query = commentsCollection.whereField(Comment.Keys.photoID.rawValue, isEqualTo: photoId).limit(to: _QUERY_LIMIT).order(by: Comment.Keys.timestamp.rawValue, descending: true)
+            query = messageBoard.whereField(field, isEqualTo: photoOrCliqId).limit(to: _QUERY_LIMIT).order(by: Comment.Keys.timestamp.rawValue, descending: true)
         }else{
             guard let last = lastSnapshot else {return}
-            query = commentsCollection.whereField(Comment.Keys.photoID.rawValue, isEqualTo: photoId).order(by: Comment.Keys.timestamp.rawValue, descending: true).start(afterDocument: last).limit(to: _QUERY_LIMIT)
+            query = messageBoard.whereField(field, isEqualTo: photoOrCliqId).order(by: Comment.Keys.timestamp.rawValue, descending: true).start(afterDocument: last).limit(to: _QUERY_LIMIT)
         }
         
         
@@ -72,11 +80,8 @@ class CommentEngine:NSObject{
     
     func postAComment(_ comment:Comment.Raw, completion:@escaping Completion){
         let batch = Firestore.database.batch()
-        //let reference = commentsCollection.document()
-        //let subscriptionRef = Firestore.database.collection(.commentSubscription).document(comment.cliqID)
-        //let subData:[String:Any] = [comment.photoID:FieldValue.increment(Int64(1)), Fields.cliqComments.rawValue:FieldValue.increment(Int64(1))]
-        //batch.setData(subData, forDocument: subscriptionRef, merge: true)
-        batch.setData(comment.data() as [String : Any], forDocument: commentsCollection.document(), merge: true)
+
+        batch.setData(comment.data() as [String : Any], forDocument: messageBoard.document(), merge: true)
         batch.commit() { err in
             completion(err)
         }
