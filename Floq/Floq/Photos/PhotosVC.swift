@@ -70,7 +70,6 @@ final class PhotosVC: UIViewController {
         return but
         }()
     
-    var userlistbutt:AvatarImageView!
     
     
     init(cliq:FLCliqItem? , id:String){
@@ -94,7 +93,6 @@ final class PhotosVC: UIViewController {
                 if let cliq = cliq{
                     self.cliq = cliq
                     self.title = cliq.name
-                    self.userlistbutt.setAvatar(uid: cliq.creatorUid)
                     if cliq.isActive && cliq.isMember(){UserDefaults.setLatest(cliq.id)}
                 }
             }
