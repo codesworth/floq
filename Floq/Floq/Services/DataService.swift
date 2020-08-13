@@ -188,7 +188,7 @@ class DataService{
     }
     
     
-    func addNewCliq(image:UIImage, name:String,locaion:CLLocation, onFinish:@escaping CompletionHandlers.dataservice){
+    func addNewCliq(image:UIImage, name:String,location:CLLocation, onFinish:@escaping CompletionHandlers.dataservice){
         
         userRef.document(UserDefaults.uid).getDocument { (snapshotq, err) in
             guard let snap = snapshotq else{
@@ -222,7 +222,7 @@ class DataService{
                         print("Error uploading: \(error)")
                         return
                     }
-                    let coordinate = GeoPoint(coordinate: locaion.coordinate)
+                    let coordinate = GeoPoint(coordinate: location.coordinate)
                     var docData: [String: Any] = [
                         "timestamp" : FieldValue.serverTimestamp(),
                         Fields.followers.rawValue: [UserDefaults.uid],
@@ -250,13 +250,21 @@ class DataService{
                             
                         } else {
                             //geofire.setLocation(location: locaion, forDocumentWithID: filePath)
-                            geofire.setLocation(location: locaion, forDocumentWithID: filePath, addTimeStamp: true, completion: nil)
+                            geofire.setLocation(location: location, forDocumentWithID: filePath, addTimeStamp: true, completion: nil)
                             onFinish(true,nil)
                         }
                     })
                     
                 })
         }
+    }
+    
+    func updateLocation(location:CLLocation, for documentID:String){
+        let point = GeoPoint(coordinate: location.coordinate)
+        floqRef.document(documentID).setData([Fields.coordinate.rawValue:point], merge: true) {_  in
+            GeoFirestore(collectionRef: self.geofireRef).setLocation(location: location, forDocumentWithID: documentID)
+        }
+        
     }
     
     func blockUser(id:String,completion:@escaping CompletionHandlers.storage){

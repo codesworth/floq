@@ -68,7 +68,7 @@ class EULAVC: UIViewController {
         App.setMethod(signInMethod)
         if signInMethod == .google{
             GIDSignIn.sharedInstance()?.delegate = self
-            GIDSignIn.sharedInstance()?.uiDelegate = self
+            GIDSignIn.sharedInstance()?.presentingViewController = self
             GIDSignIn.sharedInstance()?.signIn()
             self.loader.isHidden = false
         }else{
@@ -199,5 +199,3 @@ extension EULAVC:GIDSignInDelegate{
 }
 
 
-
-extension EULAVC:GIDSignInUIDelegate{}

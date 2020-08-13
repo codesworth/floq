@@ -31,7 +31,7 @@ class CliqEngine:NSObject{
     private var core:CoreEngine!
     public private (set)  var  myCliqs:[FLCliqItem] = []
     public private (set) var nearbyIds:NSMutableOrderedSet = []
-    private var geoPoint:GeoPoint?
+    var geoPoint:GeoPoint?
     private var lastSnapshot:DocumentSnapshot?
     private var nearbyScliq:SectionableCliq?
     private var mySectionalCliqs:SectionableCliq?
@@ -62,6 +62,14 @@ class CliqEngine:NSObject{
     @objc func listenForFlagged(_ notification:Notification){
         guard let id = notification.userInfo?[.info] as? String else {return}
         //myCliqs.forEach{if $0.fileID == id{$0.shouldFlagCover = true}}
+    }
+    
+    func refreshGeoPoint(handler:@escaping (GeoPoint) -> Void){
+        core.refreshLocation = {
+            self.geoPoint = GeoPoint(coordinate: $0.coordinate)
+            handler(self.geoPoint!)
+        }
+        core.generateLocation()
     }
     
     private var storage:Storage{
@@ -340,5 +348,14 @@ extension CliqEngine{
     }
 }
 
+//5.695 128 8621 166 96
+//5.695 112 610 514 842
+//
+//-0.239 046 73 209 214017
+//
+//
+//
+//
+//-0.239 024 756 659 152 2
 
 

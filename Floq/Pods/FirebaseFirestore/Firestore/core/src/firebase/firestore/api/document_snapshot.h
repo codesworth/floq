@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,16 +23,10 @@
 
 #include "Firestore/core/src/firebase/firestore/api/snapshot_metadata.h"
 #include "Firestore/core/src/firebase/firestore/core/event_listener.h"
+#include "Firestore/core/src/firebase/firestore/model/document.h"
 #include "Firestore/core/src/firebase/firestore/model/document_key.h"
-#include "Firestore/core/src/firebase/firestore/model/field_path.h"
-#include "Firestore/core/src/firebase/firestore/model/field_value.h"
-#include "Firestore/core/src/firebase/firestore/objc/objc_class.h"
+#include "Firestore/core/src/firebase/firestore/model/model_fwd.h"
 #include "absl/types/optional.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-OBJC_CLASS(FSTDocument);
-OBJC_CLASS(FSTObjectValue);
 
 namespace firebase {
 namespace firestore {
@@ -43,25 +37,20 @@ class Firestore;
 
 class DocumentSnapshot {
  public:
-  using Listener = std::unique_ptr<core::EventListener<DocumentSnapshot>>;
-
   DocumentSnapshot() = default;
 
-  DocumentSnapshot(std::shared_ptr<Firestore> firestore,
-                   model::DocumentKey document_key,
-                   FSTDocument* _Nullable document,
-                   SnapshotMetadata metadata);
+  static DocumentSnapshot FromDocument(std::shared_ptr<Firestore> firestore,
+                                       model::Document document,
+                                       SnapshotMetadata metadata);
 
-  DocumentSnapshot(std::shared_ptr<Firestore> firestore,
-                   model::DocumentKey document_key,
-                   FSTDocument* _Nullable document,
-                   bool from_cache,
-                   bool has_pending_writes);
+  static DocumentSnapshot FromNoDocument(std::shared_ptr<Firestore> firestore,
+                                         model::DocumentKey key,
+                                         SnapshotMetadata metadata);
 
   size_t Hash() const;
 
   bool exists() const;
-  FSTDocument* internal_document() const;
+  const absl::optional<model::Document>& internal_document() const;
   const std::string& document_id() const;
 
   const SnapshotMetadata& metadata() const {
@@ -82,11 +71,24 @@ class DocumentSnapshot {
                          const DocumentSnapshot& rhs);
 
  private:
+  // TODO(b/146372592): Make this public once we can use Abseil across
+  // iOS/public C++ library boundaries.
+  friend class DocumentReference;
+
+  DocumentSnapshot(std::shared_ptr<Firestore> firestore,
+                   model::DocumentKey document_key,
+                   absl::optional<model::Document> document,
+                   SnapshotMetadata metadata);
+
+ private:
   std::shared_ptr<Firestore> firestore_;
   model::DocumentKey internal_key_;
-  objc::Handle<FSTDocument> internal_document_;
+  absl::optional<model::Document> internal_document_;
   SnapshotMetadata metadata_;
 };
+
+using DocumentSnapshotListener =
+    std::unique_ptr<core::EventListener<DocumentSnapshot>>;
 
 inline bool operator!=(const DocumentSnapshot& lhs,
                        const DocumentSnapshot& rhs) {
@@ -96,7 +98,5 @@ inline bool operator!=(const DocumentSnapshot& lhs,
 }  // namespace api
 }  // namespace firestore
 }  // namespace firebase
-
-NS_ASSUME_NONNULL_END
 
 #endif  // FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_API_DOCUMENT_SNAPSHOT_H_

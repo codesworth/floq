@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appUser:FLUser?
     var isSyncng = false
     var isWatching = false
+    var currentLocation:CLLocation?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -97,7 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         case .facebook:
             return SDKApplicationDelegate.shared.application(app, open: url, options: options)
         case .google:
-            return GIDSignIn.sharedInstance()?.handle(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:]) ?? false
+            
+            return GIDSignIn.sharedInstance().handle(url) 
         default:
             return false
         }
@@ -332,7 +334,7 @@ extension AppDelegate:GIDSignInDelegate{
 }
 
 
-
+var applicationDelegate = (UIApplication.shared.delegate as! AppDelegate)
 
 
 

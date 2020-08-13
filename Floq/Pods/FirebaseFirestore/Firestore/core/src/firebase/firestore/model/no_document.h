@@ -30,12 +30,22 @@ class NoDocument : public MaybeDocument {
              SnapshotVersion version,
              bool has_committed_mutations);
 
-  bool HasPendingWrites() const override {
-    return has_committed_mutations_;
-  }
+  /**
+   * Casts a MaybeDocument to a NoDocument. This is a checked operation that
+   * will assert if the type of the MaybeDocument isn't actually
+   * Type::NoDocument.
+   */
+  explicit NoDocument(const MaybeDocument& document);
+
+  /** Creates an invalid NoDocument instance. */
+  NoDocument() = default;
+
+  bool has_committed_mutations() const;
 
  private:
-  bool has_committed_mutations_;
+  class Rep;
+
+  const Rep& doc_rep() const;
 };
 
 }  // namespace model

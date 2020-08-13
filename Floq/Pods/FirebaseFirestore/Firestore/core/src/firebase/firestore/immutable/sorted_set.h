@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google
+ * Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@
 #include "Firestore/core/src/firebase/firestore/immutable/sorted_container.h"
 #include "Firestore/core/src/firebase/firestore/immutable/sorted_map.h"
 #include "Firestore/core/src/firebase/firestore/util/comparison.h"
+#include "Firestore/core/src/firebase/firestore/util/empty.h"
 #include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 #include "Firestore/core/src/firebase/firestore/util/hashing.h"
 #include "absl/base/attributes.h"
@@ -31,35 +32,23 @@ namespace firebase {
 namespace firestore {
 namespace immutable {
 
-namespace impl {
-
-// An empty value to associate with keys in the underlying map.
-struct Empty {
-  friend bool operator==(Empty /* left */, Empty /* right */) {
-    return true;
-  }
-};
-
-}  // namespace impl
-
-template <typename K,
-          typename C = util::Comparator<K>,
-          typename V = impl::Empty,
-          typename M = SortedMap<K, V, C>>
+template <typename K, typename C = util::Comparator<K>>
 class SortedSet : public SortedContainer {
  public:
-  using size_type = typename M::size_type;
+  using map_type = SortedMap<K, util::Empty, C>;
+
+  using size_type = typename map_type::size_type;
   using value_type = K;
 
-  using const_iterator = typename M::const_key_iterator;
+  using const_iterator = typename map_type::const_key_iterator;
 
   explicit SortedSet(const C& comparator = C()) : map_{comparator} {
   }
 
-  explicit SortedSet(const M& map) : map_{map} {
+  explicit SortedSet(const map_type& map) : map_{map} {
   }
 
-  explicit SortedSet(M&& map) : map_{std::move(map)} {
+  explicit SortedSet(map_type&& map) : map_{std::move(map)} {
   }
 
   SortedSet(std::initializer_list<value_type> entries, const C& comparator = {})
@@ -77,8 +66,29 @@ class SortedSet : public SortedContainer {
     return map_.size();
   }
 
+  const C& comparator() const {
+    return map_.comparator();
+  }
+
   ABSL_MUST_USE_RESULT SortedSet insert(const K& key) const {
     return SortedSet{map_.insert(key, {})};
+  }
+
+  ABSL_MUST_USE_RESULT SortedSet union_with(const SortedSet& other) const {
+    const SortedSet* result_ptr = this;
+    const SortedSet* other_ptr = &other;
+
+    // Make sure `result_ptr` always points to the larger one of the two sets.
+    if (result_ptr->size() < other_ptr->size()) {
+      result_ptr = other_ptr;
+      other_ptr = this;
+    }
+
+    auto result = *result_ptr;
+    for (const auto& k : *other_ptr) {
+      result = result.insert(k);
+    }
+    return result;
   }
 
   ABSL_MUST_USE_RESULT SortedSet erase(const K& key) const {
@@ -143,13 +153,8 @@ class SortedSet : public SortedContainer {
   }
 
  private:
-  M map_;
+  map_type map_;
 };
-
-template <typename K, typename C, typename V>
-SortedSet<K, C, V> MakeSortedSet(const SortedMap<K, V, C>& map) {
-  return SortedSet<K, C, V>{map};
-}
 
 }  // namespace immutable
 }  // namespace firestore

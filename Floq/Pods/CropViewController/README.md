@@ -4,7 +4,7 @@
 <img src="https://github.com/TimOliver/TOCropViewController/raw/master/Images/screenshot.jpg" width="900" style="margin:0 auto" />
 </p>
 
-[![Build status](https://badge.buildkite.com/f2e7dda942eae2aadb2c456f1f8a9fba97c8feb378ad8638df.svg)](https://buildkite.com/xd-ci/tocropviewcontroller-run-ci)
+[![CI](https://github.com/TimOliver/TOCropViewController/workflows/CI/badge.svg)](https://github.com/TimOliver/TOCropViewController/actions?query=workflow%3ACI)
 [![Version](https://img.shields.io/cocoapods/v/TOCropViewController.svg?style=flat)](http://cocoadocs.org/docsets/TOCropViewController)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/TimOliver/TOCropViewController/master/LICENSE)
@@ -60,6 +60,18 @@ pod 'CropViewController'
 </details>
 
 <details>
+  <summary><strong>Swift Package Manager</strong></summary>
+
+Add the following to your `Package.swift`:
+``` swift
+dependencies: [
+  // ...
+  .package(url: "https://github.com/TimOliver/TOCropViewController.git"),
+],
+```
+</details>
+
+<details>
   <summary><strong>Carthage</strong></summary>
 
 1. Add the following to your Cartfile:
@@ -95,7 +107,7 @@ For a complete working example, check out the sample apps included in this repo.
 
 #### Swift
 ```swift
-func presentCropViewController {
+func presentCropViewController() {
   let image: UIImage = ... //Load an image
   
   let cropViewController = CropViewController(image: image)
@@ -234,6 +246,23 @@ While traditional cropping UI implementations will usually just have a dimming v
 </p>
 
 Since there are two views that are overlaid over the image (A dimming view and a translucency view), trying to cut a hole open in both of them would be rather complex. Instead, an image view is placed in a scroll view in the background, and a copy of the image view is placed on top, inside a container view that is clipped to the designated cropping size. The size and position of the foreground image is then made to match the background view, creating the illusion that there is a hole in the dimming views, and minimising the number of views onscreen.
+
+## Supporters
+
+### Sponsors
+
+<a href="https://github.com/marcosgriselli"><img src="https://avatars0.githubusercontent.com/u/14804033?s=460&v=4" width="100" /></a>
+
+### Donations
+
+<p float="left">
+	<a href="https://apps.apple.com/us/app/mematic-the-meme-maker/id491076730">
+	<img src="https://github.com/TimOliver/TOCropViewController/raw/master/Images/Donators/Mematic.jpg" height="100" style="padding-right:20px" />
+	</a>   
+	<a href="https://apps.apple.com/us/app/credminder-credential-manager/id1438352691">
+	<img src="https://github.com/TimOliver/TOCropViewController/raw/master/Images/Donators/CredMinder.jpg" height="100" />
+	</a>
+</p>
 
 ## Credits
 `TOCropViewController` was originally created by [Tim Oliver](http://twitter.com/TimOliverAU) as a component for [iComics](http://icomics.co), a comic reader app for iOS.

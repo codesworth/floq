@@ -20,10 +20,15 @@
 #include <string>
 
 #include "Firestore/core/src/firebase/firestore/core/field_filter.h"
-#include "Firestore/core/src/firebase/firestore/model/field_path.h"
 
 namespace firebase {
 namespace firestore {
+
+namespace model {
+class FieldPath;
+class FieldValue;
+}  // namespace model
+
 namespace core {
 
 /**
@@ -33,11 +38,8 @@ class ArrayContainsFilter : public FieldFilter {
  public:
   ArrayContainsFilter(model::FieldPath field, model::FieldValue value);
 
-  Type type() const override {
-    return Type::kArrayContainsFilter;
-  }
-
-  bool Matches(const model::Document& doc) const override;
+ private:
+  class Rep;
 };
 
 }  // namespace core

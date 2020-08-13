@@ -19,13 +19,24 @@ final public class CoreEngine:NSObject{
     private var locationManager:CLLocationManager?
     
     var locationPoint:GeoPoint!
-    public private (set) var currentLocation:CLLocation?
+    public private (set) var currentLocation:CLLocation?{
+        didSet{
+            if currentLocation != nil{applicationDelegate.currentLocation = currentLocation}
+        }
+    }
     private var isfetching = false
     public override init() {
         super.init()
         locationManager = CLLocationManager()
         
     }
+    
+    func generateLocation(){
+        locationManager?.startUpdatingLocation()
+        
+    }
+    
+    var refreshLocation:((CLLocation) -> Void)?
 
     
     enum LocationError:Error{
@@ -58,12 +69,13 @@ extension CoreEngine:CLLocationManagerDelegate{
             return
         }
         currentLocation = userLocation
+        refreshLocation?(userLocation)
         let point  = GeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
         if !isfetching{
            Subscription.main.post(suscription: .geoPointUpdated, object: point)
             isfetching = true
         }
-        locationManager?.stopUpdatingLocation()
+        locationManager?.startMonitoringSignificantLocationChanges()
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(180)) {
             self.isfetching = false
         }

@@ -22,8 +22,8 @@
 #include <utility>
 
 #include "Firestore/core/src/firebase/firestore/util/executor.h"
+#include "Firestore/core/src/firebase/firestore/util/status_fwd.h"
 #include "Firestore/core/src/firebase/firestore/util/statusor.h"
-#include "Firestore/core/src/firebase/firestore/util/statusor_callback.h"
 #include "absl/memory/memory.h"
 
 namespace firebase {
@@ -39,8 +39,7 @@ class EventListener {
   static std::unique_ptr<EventListener<T>> Create(
       util::StatusOrCallback<T> callback);
 
-  virtual ~EventListener() {
-  }
+  virtual ~EventListener() = default;
 
   /**
    * OnEvent will be called with the new value or the error if an error

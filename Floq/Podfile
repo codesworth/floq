@@ -1,5 +1,7 @@
 target 'Floq' do
     use_frameworks!
+
+  pod 'Firebase/Analytics'
   pod 'FirebaseUI/Storage'
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
@@ -7,19 +9,14 @@ target 'Floq' do
   pod 'Firebase/Storage'
   pod 'Firebase/Firestore'
   pod 'Firebase/Messaging'
-    #pod 'FBSDKShareKit','4.36.0'
+  pod 'Firebase/Crashlytics'
   pod 'FBSDKCoreKit', '4.36.0'
   pod 'FBSDKLoginKit', '4.36.0'
   pod 'FacebookCore', '0.4'
   pod 'FacebookLogin', '0.4'
-  #pod 'FacebookShare', '0.4'
   pod 'DKImagePickerController'
-  #pod 'Geofirestore'
   pod 'Firebase/Database'
   pod 'IGListKit'
-  pod 'Fabric', '~> 1.9.0'
-  pod 'Crashlytics', '~> 3.12.0'
-  #pod 'Floaty', '~> 4.0.0' # Use version 4.0.0 for Swift 4.0
  
 end
 

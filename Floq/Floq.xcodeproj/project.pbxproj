@@ -73,6 +73,8 @@
 		3D072C8424300C270088E226 /* MessageBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C8324300C270088E226 /* MessageBoardView.swift */; };
 		3D072C8724300DB00088E226 /* CommentAlternateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C8524300DB00088E226 /* CommentAlternateCell.swift */; };
 		3D072C8824300DB00088E226 /* CommentAlternateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D072C8624300DB00088E226 /* CommentAlternateCell.xib */; };
+		3D43453324B9CC8300634849 /* CliqMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D43453224B9CC8300634849 /* CliqMapVC.swift */; };
+		3D43453524B9D2AD00634849 /* CliqMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D43453424B9D2AD00634849 /* CliqMarkerView.swift */; };
 		4048BD431E88B76B00BA8BDA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4048BD421E88B76B00BA8BDA /* GoogleService-Info.plist */; };
 		406493821FDDAC3F00224DF8 /* PhotoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406493811FDDAC3F00224DF8 /* PhotoSection.swift */; };
 		407997FA1FDCDF8900AAE42A /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 407997F71FDCDF8900AAE42A /* ImageCell.swift */; };
@@ -89,7 +91,7 @@
 		40AA29BE1E8891E900200A3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40AA29BD1E8891E900200A3F /* Assets.xcassets */; };
 		40AA29C11E8891E900200A3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40AA29BF1E8891E900200A3F /* LaunchScreen.storyboard */; };
 		40FED65F1FDE0E4800EC5974 /* PhotoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FED65E1FDE0E4800EC5974 /* PhotoItem.swift */; };
-		BDD0D20C19D0DD84BDB5C758 /* Pods_Floq.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48674A44BA36DB0F31439238 /* Pods_Floq.framework */; };
+		BD7B1C869B1E757BBF0667F2 /* Pods_Floq.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A92FD6B76F158FD7C8B8822 /* Pods_Floq.framework */; };
 		C400093122072C16004B6067 /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = C400093022072C16004B6067 /* UIImage+Gif.swift */; };
 		C40FC38F21DE552400CD39A8 /* ProfileImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40FC38E21DE552400CD39A8 /* ProfileImageVC.swift */; };
 		C416EC9621D623AB00ECEE2C /* CustomAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C416EC9521D623AB00ECEE2C /* CustomAlbum.swift */; };
@@ -160,7 +162,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		057B0F75B8FF1CD316481054 /* Pods-Floq.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floq.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Floq/Pods-Floq.debug.xcconfig"; sourceTree = "<group>"; };
 		3802275F227D33F0004C3DF6 /* EULAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EULAVC.swift; sourceTree = "<group>"; };
 		382C2BDA23711F790061AA6E /* CommentNotifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotifier.swift; sourceTree = "<group>"; };
 		383352212282E80600DA6857 /* Subscriptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscriptions.swift; sourceTree = "<group>"; };
@@ -241,6 +242,8 @@
 		3D072C8324300C270088E226 /* MessageBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageBoardView.swift; sourceTree = "<group>"; };
 		3D072C8524300DB00088E226 /* CommentAlternateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentAlternateCell.swift; sourceTree = "<group>"; };
 		3D072C8624300DB00088E226 /* CommentAlternateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentAlternateCell.xib; sourceTree = "<group>"; };
+		3D43453224B9CC8300634849 /* CliqMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliqMapVC.swift; sourceTree = "<group>"; };
+		3D43453424B9D2AD00634849 /* CliqMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliqMarkerView.swift; sourceTree = "<group>"; };
 		4048BD421E88B76B00BA8BDA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4054328B1FC9C82600725AF9 /* Floq.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Floq.entitlements; sourceTree = "<group>"; };
 		406493811FDDAC3F00224DF8 /* PhotoSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSection.swift; sourceTree = "<group>"; };
@@ -260,8 +263,8 @@
 		40AA29C01E8891E900200A3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40AA29C21E8891E900200A3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40FED65E1FDE0E4800EC5974 /* PhotoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItem.swift; sourceTree = "<group>"; };
-		48674A44BA36DB0F31439238 /* Pods_Floq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Floq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6285A53FB34E03B9DFF66883 /* Pods-Floq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floq.release.xcconfig"; path = "Pods/Target Support Files/Pods-Floq/Pods-Floq.release.xcconfig"; sourceTree = "<group>"; };
+		8A92FD6B76F158FD7C8B8822 /* Pods_Floq.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Floq.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		919EE385B154C1208EB179C4 /* Pods-Floq.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floq.debug.xcconfig"; path = "Target Support Files/Pods-Floq/Pods-Floq.debug.xcconfig"; sourceTree = "<group>"; };
 		C400093022072C16004B6067 /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
 		C40FC38E21DE552400CD39A8 /* ProfileImageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageVC.swift; sourceTree = "<group>"; };
 		C416EC9521D623AB00ECEE2C /* CustomAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlbum.swift; sourceTree = "<group>"; };
@@ -313,6 +316,7 @@
 		C4D1E09621DB989000C5ED9A /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		C4D1E09821DB98D200C5ED9A /* UserSettingsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsTVC.swift; sourceTree = "<group>"; };
 		C4D4F8C621FA4B3A00A26797 /* PhotosEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosEngine.swift; sourceTree = "<group>"; };
+		E6A77040C1D68B70EBD85130 /* Pods-Floq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floq.release.xcconfig"; path = "Target Support Files/Pods-Floq/Pods-Floq.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,7 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDD0D20C19D0DD84BDB5C758 /* Pods_Floq.framework in Frameworks */,
+				BD7B1C869B1E757BBF0667F2 /* Pods_Floq.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,8 +568,8 @@
 				38B02E1A2214744D00DEEC21 /* FloqTests */,
 				3889A44823702DF300BD2B85 /* FloqUITests */,
 				40AA29B41E8891E900200A3F /* Products */,
-				DC970CADBD80A1EFC9A0A3CD /* Pods */,
-				C6C4421E77313EAEA9683D29 /* Frameworks */,
+				FDC4863609D55A19830748E8 /* Pods */,
+				8AC2166B87F0CC069DCE7E56 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -596,6 +600,14 @@
 				C4A2A42121A2294C006DFE6E /* Views */,
 			);
 			path = Floq;
+			sourceTree = "<group>";
+		};
+		8AC2166B87F0CC069DCE7E56 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A92FD6B76F158FD7C8B8822 /* Pods_Floq.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C400092F22072C01004B6067 /* SwiftGif */ = {
@@ -658,6 +670,7 @@
 				C4A2A43D21A22CB5006DFE6E /* AddCliqVC.swift */,
 				C4D1E08B21D794D400C5ED9A /* NearbyCliqsVC.swift */,
 				C434C51021DCBE33003333A1 /* MyCliqsVC.swift */,
+				3D43453224B9CC8300634849 /* CliqMapVC.swift */,
 			);
 			path = Cliqs;
 			sourceTree = "<group>";
@@ -757,6 +770,7 @@
 				385811AE23BBA947002CC9B0 /* GradientView.swift */,
 				385F7F14242D903D004CCB88 /* TabView.swift */,
 				3D072C7B242F339F0088E226 /* PhotoSideBar.swift */,
+				3D43453424B9D2AD00634849 /* CliqMarkerView.swift */,
 			);
 			name = Views;
 			path = "New Group";
@@ -813,21 +827,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		C6C4421E77313EAEA9683D29 /* Frameworks */ = {
+		FDC4863609D55A19830748E8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				48674A44BA36DB0F31439238 /* Pods_Floq.framework */,
+				919EE385B154C1208EB179C4 /* Pods-Floq.debug.xcconfig */,
+				E6A77040C1D68B70EBD85130 /* Pods-Floq.release.xcconfig */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		DC970CADBD80A1EFC9A0A3CD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				057B0F75B8FF1CD316481054 /* Pods-Floq.debug.xcconfig */,
-				6285A53FB34E03B9DFF66883 /* Pods-Floq.release.xcconfig */,
-			);
-			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -873,13 +879,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40AA29C51E8891E900200A3F /* Build configuration list for PBXNativeTarget "Floq" */;
 			buildPhases = (
-				B57EA2233D44F7AC23ABD8A2 /* [CP] Check Pods Manifest.lock */,
+				0904727B466CFE4BD8057073 /* [CP] Check Pods Manifest.lock */,
 				40AA29AF1E8891E900200A3F /* Sources */,
 				40AA29B01E8891E900200A3F /* Frameworks */,
 				40AA29B11E8891E900200A3F /* Resources */,
-				78428CF0718D5AF6743417FC /* [CP] Embed Pods Frameworks */,
 				C4A28E4521E0323500ADA02D /* ShellScript */,
-				F169714410531646A30E4830 /* [CP] Copy Pods Resources */,
+				79E8D0D092B1192F33B7AB34 /* [CP] Embed Pods Frameworks */,
+				99AA3A24F79E9D6FB3F96E96 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1016,13 +1022,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		78428CF0718D5AF6743417FC /* [CP] Embed Pods Frameworks */ = {
+		0904727B466CFE4BD8057073 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Floq-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79E8D0D092B1192F33B7AB34 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Floq/Pods-Floq-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
@@ -1031,16 +1060,18 @@
 				"${BUILT_PRODUCTS_DIR}/DKPhotoGallery/DKPhotoGallery.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IGListDiffKit/IGListDiffKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
+				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -1048,6 +1079,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
@@ -1056,16 +1088,18 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DKPhotoGallery.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListDiffKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImageFLPlugin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -1076,22 +1110,22 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Floq/Pods-Floq-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B57EA2233D44F7AC23ABD8A2 /* [CP] Check Pods Manifest.lock */ = {
+		99AA3A24F79E9D6FB3F96E96 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${PODS_ROOT}/Target Support Files/Pods-Floq/Pods-Floq-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
-			name = "[CP] Check Pods Manifest.lock";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Floq-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Floq/Pods-Floq-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C4A28E4521E0323500ADA02D /* ShellScript */ = {
@@ -1110,25 +1144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
-		};
-		F169714410531646A30E4830 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Floq/Pods-Floq-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Floq/Pods-Floq-resources.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1230,11 +1246,13 @@
 				C4A2A43B21A22C4A006DFE6E /* FullScreenCell.swift in Sources */,
 				C45CE27421E0CD7C0071C59D /* OnBoardingPVC.swift in Sources */,
 				38CC9EBA22EF050C00483DC7 /* CommentsInputView copy.swift in Sources */,
+				3D43453524B9D2AD00634849 /* CliqMarkerView.swift in Sources */,
 				C45CE27821E0CF010071C59D /* OnBoardInfoTwoVC.swift in Sources */,
 				40A1F74D20F3082800DDA0B1 /* ImagePickerController.swift in Sources */,
 				38D007CC23BAD492001899A0 /* AuthenticationVC.swift in Sources */,
 				C43B8D5522006B30003B7A00 /* UpdateInfo.swift in Sources */,
 				C416EC9621D623AB00ECEE2C /* CustomAlbum.swift in Sources */,
+				3D43453324B9CC8300634849 /* CliqMapVC.swift in Sources */,
 				C4A2A43A21A22C4A006DFE6E /* SupportViews.swift in Sources */,
 				3D072C76242ED3250088E226 /* Alerts.swift in Sources */,
 				3D072C70242ED0DC0088E226 /* Tests.swift in Sources */,
@@ -1522,7 +1540,7 @@
 		};
 		40AA29C61E8891E900200A3F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 057B0F75B8FF1CD316481054 /* Pods-Floq.debug.xcconfig */;
+			baseConfigurationReference = 919EE385B154C1208EB179C4 /* Pods-Floq.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1530,12 +1548,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y86G6TS245;
 				INFOPLIST_FILE = Floq/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.21;
 				PRODUCT_BUNDLE_IDENTIFIER = com.floq.Floq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1549,7 +1567,7 @@
 		};
 		40AA29C71E8891E900200A3F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6285A53FB34E03B9DFF66883 /* Pods-Floq.release.xcconfig */;
+			baseConfigurationReference = E6A77040C1D68B70EBD85130 /* Pods-Floq.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1557,11 +1575,11 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y86G6TS245;
 				INFOPLIST_FILE = Floq/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.12;
+				MARKETING_VERSION = 1.21;
 				PRODUCT_BUNDLE_IDENTIFIER = com.floq.Floq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -19,6 +19,7 @@
 #include <ostream>
 #include <utility>
 
+#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 #include "Firestore/core/src/firebase/firestore/util/string_format.h"
 #include "absl/memory/memory.h"
 
@@ -26,11 +27,9 @@ namespace firebase {
 namespace firestore {
 namespace util {
 
-Status::Status(Error code, absl::string_view msg) {
-  HARD_ASSERT(code != Error::Ok);
-  state_ = absl::make_unique<State>();
-  state_->code = code;
-  state_->msg = static_cast<std::string>(msg);
+Status::Status(Error code, std::string msg) {
+  HARD_ASSERT(code != Error::kOk);
+  state_ = State::MakePtr(code, std::move(msg));
 }
 
 void Status::Update(const Status& new_status) {
@@ -40,19 +39,20 @@ void Status::Update(const Status& new_status) {
 }
 
 Status& Status::CausedBy(const Status& cause) {
-  if (cause.ok() || this == &cause) {
+  if (cause.ok() || this == &cause || cause.IsMovedFrom()) {
     return *this;
   }
 
-  if (ok()) {
+  if (ok() || IsMovedFrom()) {
     *this = cause;
     return *this;
   }
 
+  std::string new_message = error_message();
   absl::StrAppend(&state_->msg, ": ", cause.error_message());
 
   // If this Status has no accompanying PlatformError but the cause does, create
-  // an PlatformError for this Status ahead of time to preserve the causal chain
+  // a PlatformError for this Status ahead of time to preserve the causal chain
   // that Status doesn't otherwise support.
   if (state_->platform_error == nullptr &&
       cause.state_->platform_error != nullptr) {
@@ -65,15 +65,30 @@ Status& Status::CausedBy(const Status& cause) {
 
 Status& Status::WithPlatformError(std::unique_ptr<PlatformError> error) {
   HARD_ASSERT(!ok(), "Platform errors should not be applied to Status::OK()");
+  if (IsMovedFrom()) {
+    std::string message = moved_from_message();
+    state_ = State::MakePtr(Error::kInternal, std::move(message));
+  }
   state_->platform_error = std::move(error);
   return *this;
+}
+
+void Status::State::Deleter::operator()(const State* ptr) const {
+  if (ptr != State::MovedFromIndicator()) {
+    delete ptr;
+  }
+}
+
+void Status::SetMovedFrom() {
+  // Set pointer value to `0x1` as the pointer is no longer useful.
+  state_ = State::StatePtr{State::MovedFromIndicator()};
 }
 
 void Status::SlowCopyFrom(const State* src) {
   if (src == nullptr) {
     state_ = nullptr;
   } else {
-    state_ = absl::make_unique<State>(*src);
+    state_ = State::MakePtr(*src);
   }
 }
 
@@ -82,58 +97,63 @@ const std::string& Status::empty_string() {
   return *empty;
 }
 
+const std::string& Status::moved_from_message() {
+  static std::string* message = new std::string("Status accessed after move.");
+  return *message;
+}
+
 std::string Status::ToString() const {
   if (state_ == nullptr) {
     return "OK";
   } else {
     std::string result;
     switch (code()) {
-      case Error::Cancelled:
+      case Error::kCancelled:
         result = "Cancelled";
         break;
-      case Error::Unknown:
+      case Error::kUnknown:
         result = "Unknown";
         break;
-      case Error::InvalidArgument:
+      case Error::kInvalidArgument:
         result = "Invalid argument";
         break;
-      case Error::DeadlineExceeded:
+      case Error::kDeadlineExceeded:
         result = "Deadline exceeded";
         break;
-      case Error::NotFound:
+      case Error::kNotFound:
         result = "Not found";
         break;
-      case Error::AlreadyExists:
+      case Error::kAlreadyExists:
         result = "Already exists";
         break;
-      case Error::PermissionDenied:
+      case Error::kPermissionDenied:
         result = "Permission denied";
         break;
-      case Error::Unauthenticated:
+      case Error::kUnauthenticated:
         result = "Unauthenticated";
         break;
-      case Error::ResourceExhausted:
+      case Error::kResourceExhausted:
         result = "Resource exhausted";
         break;
-      case Error::FailedPrecondition:
+      case Error::kFailedPrecondition:
         result = "Failed precondition";
         break;
-      case Error::Aborted:
+      case Error::kAborted:
         result = "Aborted";
         break;
-      case Error::OutOfRange:
+      case Error::kOutOfRange:
         result = "Out of range";
         break;
-      case Error::Unimplemented:
+      case Error::kUnimplemented:
         result = "Unimplemented";
         break;
-      case Error::Internal:
+      case Error::kInternal:
         result = "Internal";
         break;
-      case Error::Unavailable:
+      case Error::kUnavailable:
         result = "Unavailable";
         break;
-      case Error::DataLoss:
+      case Error::kDataLoss:
         result = "Data loss";
         break;
       default:
@@ -141,7 +161,7 @@ std::string Status::ToString() const {
         break;
     }
     result += ": ";
-    result += state_->msg;
+    result += IsMovedFrom() ? moved_from_message() : state_->msg;
     return result;
   }
 }

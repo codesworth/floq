@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,26 +21,19 @@
 #include <string>
 #include <utility>
 
-#include "Firestore/core/src/firebase/firestore/api/listener_registration.h"
-#include "Firestore/core/src/firebase/firestore/api/query_snapshot.h"
-#include "Firestore/core/src/firebase/firestore/api/source.h"
-#include "Firestore/core/src/firebase/firestore/core/direction.h"
-#include "Firestore/core/src/firebase/firestore/core/event_listener.h"
+#include "Firestore/core/src/firebase/firestore/api/api_fwd.h"
+#include "Firestore/core/src/firebase/firestore/core/core_fwd.h"
 #include "Firestore/core/src/firebase/firestore/core/filter.h"
-#include "Firestore/core/src/firebase/firestore/core/listen_options.h"
-#include "Firestore/core/src/firebase/firestore/model/field_value.h"
-#include "Firestore/core/src/firebase/firestore/objc/objc_class.h"
-
-OBJC_CLASS(FSTBound);
-OBJC_CLASS(FSTQuery);
-
-NS_ASSUME_NONNULL_BEGIN
+#include "Firestore/core/src/firebase/firestore/core/query.h"
 
 namespace firebase {
 namespace firestore {
-namespace api {
 
-class Firestore;
+namespace model {
+class FieldValue;
+}  // namespace model
+
+namespace api {
 
 /**
  * A `Query` refers to a Firestore Query which you can read or listen to. You
@@ -50,7 +43,7 @@ class Query {
  public:
   Query() = default;
 
-  Query(FSTQuery* query, std::shared_ptr<Firestore> firestore);
+  Query(core::Query query, std::shared_ptr<Firestore> firestore);
 
   size_t Hash() const;
 
@@ -58,7 +51,9 @@ class Query {
     return firestore_;
   }
 
-  FSTQuery* query() const;
+  const core::Query& query() const {
+    return query_;
+  }
 
   /**
    * Reads the documents matching this query.
@@ -69,7 +64,7 @@ class Query {
    * @param callback a callback to execute once the documents have been
    *     successfully read.
    */
-  void GetDocuments(Source source, QuerySnapshot::Listener&& callback);
+  void GetDocuments(Source source, QuerySnapshotListener&& callback);
 
   /**
    * Attaches a listener for QuerySnapshot events.
@@ -80,8 +75,8 @@ class Query {
    *
    * @return A ListenerRegistration that can be used to remove this listener.
    */
-  ListenerRegistration AddSnapshotListener(core::ListenOptions options,
-                                           QuerySnapshot::Listener&& listener);
+  std::unique_ptr<ListenerRegistration> AddSnapshotListener(
+      core::ListenOptions options, QuerySnapshotListener&& listener);
 
   /**
    * Creates and returns a new `Query` with the additional filter that documents
@@ -124,14 +119,27 @@ class Query {
   Query OrderBy(model::FieldPath field_path, core::Direction direction) const;
 
   /**
-   * Creates and returns a new `Query` that's additionally limited to only
-   * return up to the specified number of documents.
+   * Creates and returns a new `Query` that only returns the first matching
+   * documents up to the specified number.
    *
    * @param limit The maximum number of items to return.
    *
    * @return The created `Query`.
    */
-  Query Limit(int32_t limit) const;
+  Query LimitToFirst(int32_t limit) const;
+
+  /**
+   * Creates and returns a new `Query` that only returns the last matching
+   * documents up to the specified number.
+   *
+   * You must specify at least one `OrderBy` clause for `LimitToLast` queries,
+   * it is an error otherwise when the query is executed.
+   *
+   * @param limit The maximum number of items to return.
+   *
+   * @return The created `Query`.
+   */
+  Query LimitToLast(int32_t limit) const;
 
   /**
    * Creates and returns a new `Query` that starts at the given bound.  The
@@ -142,7 +150,7 @@ class Query {
    *
    * @return The created `Query`.
    */
-  Query StartAt(FSTBound* bound) const;
+  Query StartAt(core::Bound bound) const;
 
   /**
    * Creates and returns a new `Query` that ends at the given bound.  The ending
@@ -153,25 +161,41 @@ class Query {
    *
    * @return The created `Query`.
    */
-  Query EndAt(FSTBound* bound) const;
+  Query EndAt(core::Bound bound) const;
 
   /**
    * Creates a new `Query` with the given internal query.
    */
-  Query Wrap(FSTQuery* chained_query) {
-    return Query(chained_query, firestore_);
+  Query Wrap(core::Query chained_query) const {
+    return Query(std::move(chained_query), firestore_);
   }
 
  private:
   void ValidateNewFilter(const core::Filter& filter) const;
-  void ValidateNewOrderByPath(const model::FieldPath& fieldPath) const;
-  void ValidateOrderByField(const model::FieldPath& orderByField,
-                            const model::FieldPath& inequalityField) const;
+  void ValidateNewOrderByPath(const model::FieldPath& field_path) const;
+  void ValidateOrderByField(const model::FieldPath& order_by_field,
+                            const model::FieldPath& inequality_field) const;
+  void ValidateHasExplicitOrderByForLimitToLast() const;
+  /**
+   * Validates that the value passed into a disjunctive filter satisfies all
+   * array requirements.
+   */
+  void ValidateDisjunctiveFilterElements(const model::FieldValue& field_value,
+                                         core::Filter::Operator op) const;
 
-  Query Wrap(FSTQuery* query) const;
+  /**
+   * Parses the given FieldValue into a Reference, throwing appropriate errors
+   * if the value is anything other than a Reference or String, or if the string
+   * is malformed.
+   */
+  model::FieldValue ParseExpectedReferenceValue(
+      const model::FieldValue& field_value,
+      const std::function<std::string()>& type_describer) const;
+
+  std::string Describe(core::Filter::Operator op) const;
 
   std::shared_ptr<Firestore> firestore_;
-  objc::Handle<FSTQuery> query_;
+  core::Query query_;
 };
 
 bool operator==(const Query& lhs, const Query& rhs);
@@ -183,7 +207,5 @@ inline bool operator!=(const Query& lhs, const Query& rhs) {
 }  // namespace api
 }  // namespace firestore
 }  // namespace firebase
-
-NS_ASSUME_NONNULL_END
 
 #endif  // FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_API_QUERY_CORE_H_

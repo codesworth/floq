@@ -55,7 +55,7 @@ final class PhotosVC: UIViewController {
     }()
     
     lazy var sideBar:PhotoSideBar = {[unowned self] in
-        return PhotoSideBar(frame: CGRect(x:UIScreen.width + 64, y:0, width: UIScreen.width * 0.4, height: UIScreen.height - (UIScreen.main.hasNotch ? 160 : 120)))
+        return PhotoSideBar(frame: CGRect(x:UIScreen.width + 64, y:0, width: UIScreen.width * 0.4, height: UIScreen.height - (UIScreen.main.hasNotch ? 160 : 120)), canShowChangeLocation: cliq?.creatorUid == UserDefaults.uid && (cliq?.isActive ?? false))
         }()
     
     lazy var deleteButton:UIButton = { [unowned self] in
@@ -182,6 +182,27 @@ final class PhotosVC: UIViewController {
         
         sideBar.actionForLogoutButton = {
             self.logout()
+        }
+        
+        sideBar.actionForChangeLocationButton = {
+            let alert = UIAlertController(title: "Change Cliq Location", message: "This will change the location of your cliq.  It will no longer be discoverable at the previous location.  Tap 'Change' to move cliq to your current location.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in}))
+            alert.addAction(UIAlertAction(title: "Change", style: .default, handler: {_ in
+                self.updatePhotoLocation()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func updatePhotoLocation(){
+        if let location = applicationDelegate.currentLocation{
+            let point = GeoPoint(coordinate: location.coordinate)
+            DataService.main.updateLocation(location: CLLocation(latitude: point.latitude, longitude: point.longitude), for: self.cliqID)
+                let alert = UIAlertController(title: "Success", message: "Cliq Location moved", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Okay", style: .cancel, handler: {_ in}))
+            //SnackBar.makeSncakMessage(text: "Heyaaaa Workwinfg", color: .seafoamBlue)
+                self.present(alert, animated: true, completion: nil)
+            
         }
     }
     

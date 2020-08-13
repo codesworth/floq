@@ -16,8 +16,10 @@ class PhotoSideBar:UIView,Insetable{
     var actionForDetailButton:CompletionHandlers.simpleBlock?
     
     var actionForLogoutButton:CompletionHandlers.simpleBlock?
+    var actionForChangeLocationButton:CompletionHandlers.simpleBlock?
     
     private var isShowing = false
+    var canShowChangeLocation = false
     
     lazy var accountButton:UIButton = {[unowned self] in
         let but = UIButton(frame:.zero)
@@ -55,6 +57,15 @@ class PhotoSideBar:UIView,Insetable{
         return but
         }()
     
+    lazy var changeLoc:UIButton = {[unowned self] in
+    let but = UIButton(frame:.zero)
+    but.setAttributedTitle("Change Location".attributing([.textColor(.white),.font(.systemFont(ofSize: 16, weight: .regular)), .alignment(.left)]), for: .normal)
+    but.contentMode = .scaleAspectFit
+    but.titleLabel?.textAlignment = .left
+    but.addTarget(self, action: #selector(tabPressed(_:)), for: .touchUpInside)
+    return but
+    }()
+    
     
     
     
@@ -66,13 +77,22 @@ class PhotoSideBar:UIView,Insetable{
             actionForDeleteButton?()
         }else if sender == detailButton{
             actionForDetailButton?()
-        }else{
+        }else if sender == logoutButton{
             actionForLogoutButton?()
+        }else if sender == changeLoc{
+            actionForChangeLocationButton?()
         }
     }
     
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, canShowChangeLocation:Bool) {
+        super.init(frame: frame)
+        self.canShowChangeLocation = canShowChangeLocation
+        initialize()
+        
+    }
+    
+    private override init(frame: CGRect) {
         super.init(frame: frame)
         initialize()
         
@@ -94,6 +114,8 @@ class PhotoSideBar:UIView,Insetable{
         addSubview(deletebutton)
         addSubview(detailButton)
         addSubview(logoutButton)
+        addSubview(changeLoc)
+        changeLoc.isHidden = !canShowChangeLocation
         dropShadow(5, color: .black, 0.8, CGSize(width: 0, height: 4))
     }
     
@@ -106,9 +128,18 @@ class PhotoSideBar:UIView,Insetable{
              $0.width |=| "Account".width(withConstrainedHeight: 30, font: .systemFont(ofSize: 16))
         }
         
+        if canShowChangeLocation{
+            changeLoc.layout{
+                $0.leading == leadingAnchor + horizontalInsetBy(0.5)
+                $0.top == accountButton.bottomAnchor + verticalInset
+                $0.height |=| 30
+                $0.width |=| "Change Location".width(withConstrainedHeight: 30, font: .systemFont(ofSize: 16))
+            }
+        }
+        
         deletebutton.layout{
             $0.leading == leadingAnchor + horizontalInsetBy(0.5)
-            $0.top == accountButton.bottomAnchor + verticalInset
+            $0.top == (canShowChangeLocation ? changeLoc.bottomAnchor : accountButton.bottomAnchor) + verticalInset
             $0.height |=| 30
             $0.width |=| "Delete Photos".width(withConstrainedHeight: 30, font: .systemFont(ofSize: 16))
         }

@@ -27,6 +27,7 @@
 
 #include "Firestore/core/src/firebase/firestore/immutable/sorted_map.h"
 #include "Firestore/core/src/firebase/firestore/model/field_mask.h"
+#include "Firestore/core/src/firebase/firestore/nanopb/byte_string.h"
 #include "Firestore/core/src/firebase/firestore/timestamp_internal.h"
 #include "Firestore/core/src/firebase/firestore/util/comparison.h"
 #include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
@@ -262,9 +263,8 @@ class TimestampValue : public BaseValue {
  *
  * Notes:
  *   - ServerTimestampValue instances are created as the result of applying an
- *     FSTTransformMutation (see [FSTTransformMutation applyTo]). They can only
- *     exist in the local view of a document. Therefore they do not need to be
- *     parsed or serialized.
+ *     TransformMutation. They can only exist in the local view of a document.
+ *     Therefore they do not need to be parsed or serialized.
  *   - When evaluated locally (e.g. via DocumentSnapshot data), they by default
  *     evaluate to null.
  *   - This behavior can be configured by passing custom FieldValueOptions to
@@ -275,7 +275,7 @@ class TimestampValue : public BaseValue {
 class ServerTimestampValue : public FieldValue::BaseValue {
  public:
   explicit ServerTimestampValue(ServerTimestamp server_timestamp)
-      : server_timestamp_(server_timestamp) {
+      : server_timestamp_(std::move(server_timestamp)) {
   }
 
   Type type() const override {
@@ -736,6 +736,10 @@ FieldValue FieldValue::FromTimestamp(const Timestamp& value) {
   return FieldValue(std::make_shared<TimestampValue>(value));
 }
 
+FieldValue FieldValue::FromServerTimestamp(const Timestamp& local_write_time) {
+  return FromServerTimestamp(local_write_time, absl::nullopt);
+}
+
 FieldValue FieldValue::FromServerTimestamp(
     const Timestamp& local_write_time,
     absl::optional<FieldValue> previous_value) {
@@ -811,6 +815,10 @@ ComparisonResult FieldValue::BaseValue::CompareTypes(
 // would make this have Type::Null, which then blows up when you try to Set
 // on it.
 ObjectValue::ObjectValue() : fv_(FieldValue::EmptyObject()) {
+}
+
+ObjectValue::ObjectValue(FieldValue fv) : fv_(std::move(fv)) {
+  HARD_ASSERT(fv_.type() == FieldValue::Type::Object);
 }
 
 ObjectValue ObjectValue::FromMap(const FieldValue::Map& value) {

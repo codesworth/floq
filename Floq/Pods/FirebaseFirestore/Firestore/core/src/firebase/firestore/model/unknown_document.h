@@ -31,9 +31,18 @@ class UnknownDocument : public MaybeDocument {
  public:
   UnknownDocument(DocumentKey key, SnapshotVersion version);
 
-  bool HasPendingWrites() const override {
-    return true;
-  }
+  /**
+   * Casts a MaybeDocument to a UnknownDocument. This is a checked operation
+   * that will assert if the type of the MaybeDocument isn't actually
+   * Type::UnknownDocument.
+   */
+  explicit UnknownDocument(const MaybeDocument& document);
+
+  /** Creates an invalid UnknownDocument. */
+  UnknownDocument() = default;
+
+ private:
+  class Rep;
 };
 
 }  // namespace model

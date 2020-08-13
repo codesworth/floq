@@ -17,10 +17,13 @@
 #ifndef FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_MODEL_MUTATION_BATCH_H_
 #define FIRESTORE_CORE_SRC_FIREBASE_FIRESTORE_MODEL_MUTATION_BATCH_H_
 
+#include <iosfwd>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "Firestore/core/include/firebase/firestore/timestamp.h"
+#include "Firestore/core/src/firebase/firestore/model/model_fwd.h"
 #include "Firestore/core/src/firebase/firestore/model/mutation.h"
 #include "Firestore/core/src/firebase/firestore/model/types.h"
 
@@ -29,15 +32,13 @@ namespace firestore {
 namespace model {
 
 /**
- * A BatchID that was searched for and not found or a batch ID value known to be
- * before all known batches.
+ * A BatchID that was searched for and not found or a batch ID value known to
+ * be before all known batches.
  *
  * BatchId values from the local store are non-negative so this value is before
  * all batches.
  */
 constexpr BatchId kBatchIdUnknown = -1;
-
-// TODO(rsgowman): Port MutationBatchResult
 
 /**
  * A batch of mutations that will be sent as one unit to the backend. Batches
@@ -46,23 +47,12 @@ constexpr BatchId kBatchIdUnknown = -1;
  */
 class MutationBatch {
  public:
-  /**
-   * A batch ID that was searched for and not found or a batch ID value known to
-   * be before all known batches.
-   *
-   * Batch ID values from the local store are non-negative so this value is
-   * before all batches.
-   */
-  constexpr static int kUnknown = -1;
-
   MutationBatch(int batch_id,
                 Timestamp local_write_time,
-                std::vector<std::unique_ptr<Mutation>>&& mutations);
+                std::vector<Mutation> base_mutations,
+                std::vector<Mutation> mutations);
 
-  // TODO(rsgowman): Port ApplyToRemoteDocument()
-  // TODO(rsgowman): Port ApplyToLocalView()
-  // TODO(rsgowman): Port GetKeys()
-
+  /** The unique ID of this mutation batch. */
   int batch_id() const {
     return batch_id_;
   }
@@ -75,17 +65,79 @@ class MutationBatch {
     return local_write_time_;
   }
 
-  const std::vector<std::unique_ptr<Mutation>>& mutations() const {
+  /**
+   * Mutations that are used to populate the base values when this mutation is
+   * applied locally. This can be used to locally overwrite values that are
+   * persisted in the remote document cache. Base mutations are never sent to
+   * the backend.
+   */
+  const std::vector<Mutation>& base_mutations() const {
+    return base_mutations_;
+  }
+
+  /**
+   * The user-provided mutations in this mutation batch. User-provided
+   * mutations are applied both locally and remotely on the backend.
+   */
+  const std::vector<Mutation>& mutations() const {
     return mutations_;
   }
 
+  /**
+   * Applies all the mutations in this MutationBatch to the specified document
+   * to create a new remote document.
+   *
+   * @param maybe_doc The document to which to apply mutations or nullopt if
+   *     there's no existing document.
+   * @param document_key The key of the document to apply mutations to.
+   * @param mutation_batch_result The result of applying the MutationBatch to
+   *     the backend.
+   */
+  absl::optional<MaybeDocument> ApplyToRemoteDocument(
+      absl::optional<MaybeDocument> maybe_doc,
+      const DocumentKey& document_key,
+      const MutationBatchResult& mutation_batch_result) const;
+
+  /**
+   * Estimates the latency compensated view of all the mutations in this batch
+   * applied to the given MaybeDocument.
+   *
+   * Unlike ApplyToRemoteDocument, this method is used before the mutation has
+   * been committed and so it's possible that the mutation is operating on a
+   * locally non-existent document and may produce a non-existent document.
+   *
+   * @param maybe_doc The document to which to apply mutations or nullopt if
+   *     there's no existing document.
+   * @param document_key The key of the document to apply mutations to.
+   */
+  absl::optional<MaybeDocument> ApplyToLocalDocument(
+      absl::optional<MaybeDocument> maybe_doc,
+      const DocumentKey& document_key) const;
+
+  /**
+   * Computes the local view for all provided documents given the mutations in
+   * this batch.
+   */
+  MaybeDocumentMap ApplyToLocalDocumentSet(
+      const MaybeDocumentMap& document_set) const;
+
+  /**
+   * Returns the set of unique keys referenced by all mutations in the batch.
+   */
+  DocumentKeySet keys() const;
+
+  friend bool operator==(const MutationBatch& lhs, const MutationBatch& rhs);
+
+  std::string ToString() const;
+
+  friend std::ostream& operator<<(std::ostream& os, const MutationBatch& batch);
+
  private:
   int batch_id_;
-  const Timestamp local_write_time_;
-  std::vector<std::unique_ptr<Mutation>> mutations_;
+  Timestamp local_write_time_;
+  std::vector<Mutation> base_mutations_;
+  std::vector<Mutation> mutations_;
 };
-
-bool operator==(const MutationBatch& lhs, const MutationBatch& rhs);
 
 inline bool operator!=(const MutationBatch& lhs, const MutationBatch& rhs) {
   return !(lhs == rhs);

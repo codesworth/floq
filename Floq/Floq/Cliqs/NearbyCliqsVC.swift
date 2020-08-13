@@ -9,6 +9,7 @@
 import IGListKit
 import Firebase
 
+
 import CoreLocation
 
 
@@ -27,6 +28,9 @@ class NearbyCliqsVC: UIViewController{
         return ListAdapter(updater: ListAdapterUpdater(), viewController: self, workingRangeSize: 2)
     }()
 
+    lazy var mapVC:CliqMapVC = {
+        CliqMapVC(engine: photoEngine)
+    }()
 
 
     convenience init(data:[FLCliqItem]) {
@@ -48,10 +52,18 @@ class NearbyCliqsVC: UIViewController{
         
           navigationController?.navigationBar.topItem?.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         view.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1)
+        let button = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_loc_alternate"), style: .plain, target: self, action: #selector(switchToMap(_:)))
+        button.tag = 200
+        button.tintColor = .white
+        let buttonTwo = UIBarButtonItem(image: #imageLiteral(resourceName: "menu"), style: .plain, target: self, action: #selector(switchToList(_:)))
+        button.tag = 100
+        button.tintColor = .white
+        navigationItem.setRightBarButtonItems([button,buttonTwo], animated: true)
         
         collectionView.backgroundColor = .globalbackground
         performRegistrations()
-        
+        self.add(mapVC, to: view)
+        mapVC.view.isHidden = true
         
         let floaty = Floaty()
         floaty.buttonColor = .clear
@@ -67,9 +79,12 @@ class NearbyCliqsVC: UIViewController{
         adapter.dataSource = self
         adapter.reloadData(completion: nil)
     }
+    
+    
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        mapVC.view.frame = view.bounds
         collectionView.frame = view.bounds
     }
     
@@ -88,8 +103,24 @@ class NearbyCliqsVC: UIViewController{
         adapter.reloadData(completion: nil)
     }
 
+    
+    @objc func switchToList(_ sender:UIBarButtonItem){
+        mapVC.view.isHidden = true
+        collectionView.isHidden = false
+    }
+    
+    @objc func switchToMap(_ sender:UIBarButtonItem){
+        mapVC.view.isHidden = false
+        collectionView.isHidden = true
+        if let location = applicationDelegate.currentLocation{
+            mapVC.mapView.setCenter(location.coordinate, animated: true)
+        }
+    }
 
 
+    func openCliqDetail(_ cliq:FLCliqItem){
+        self.navigationController?.pushViewController(PhotosVC(cliq: cliq, id: cliq.id), animated: true)
+    }
 }
 
 
@@ -112,7 +143,7 @@ extension NearbyCliqsVC: UICollectionViewDelegate, ListAdapterDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cliq = self.photoEngine.nearbyCliqs[indexPath.section]
-        self.navigationController?.pushViewController(PhotosVC(cliq: cliq, id: cliq.id), animated: true)
+        openCliqDetail(cliq)
 
     }
     

@@ -56,7 +56,7 @@ class AuthenticationVC: UIViewController {
     @IBAction func googlePressed(_ sender: UIButton) {
         loader.isHidden = false
         GIDSignIn.sharedInstance()?.delegate = self
-        GIDSignIn.sharedInstance()?.uiDelegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.signIn()
     }
     
@@ -189,4 +189,3 @@ extension AuthenticationVC:GIDSignInDelegate{
 
 
 
-extension AuthenticationVC:GIDSignInUIDelegate{}

@@ -202,7 +202,7 @@ class AddCliqVC: UIViewController {
         let overlay = LoaderView(frame: self.view.frame)
         overlay.label.text = "Creating Cliq, Please wait..."
         self.view.addSubview(overlay)
-        DataService.main.addNewCliq(image: image, name: name!, locaion: loc) { (success, errM) in
+        DataService.main.addNewCliq(image: image, name: name!, location: loc) { (success, errM) in
             if let suc = success as? Bool{
                 if suc && errM == nil{
                   self.dismiss(animated: true, completion: nil)

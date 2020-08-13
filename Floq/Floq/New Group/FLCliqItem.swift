@@ -70,7 +70,7 @@ class FLCliqItem:ListDiffable, Equatable{
     public private (set) var isActive:Bool
     public private (set) var timestamp:Date
     public var shouldFlagCover:Bool = false
-    private var location:CLLocation?
+    public private(set) var location:CLLocation?
     public var joined:Bool
     
     func isNearby(location:CLLocation)-> Bool{

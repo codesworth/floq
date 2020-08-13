@@ -71,6 +71,20 @@ extension UIView{
         translatesAutoresizingMaskIntoConstraints = false
         closure(LayoutProxy(view:self))
     }
+    
+    func bounce(delay:DispatchTime,name:String,duration:CFTimeInterval = 0.8, autoReverse:Bool = true){
+        guard layer.animation(forKey: name) == nil else {return}
+        let animation = CABasicAnimation(keyPath: "transform")
+        animation.fromValue = NSValue(caTransform3D:CATransform3DMakeScale(1, 1, 1))
+        animation.toValue = NSValue(caTransform3D: CATransform3DMakeScale(1.4, 1.4, 1))
+        animation.duration = duration
+        animation.repeatCount = .infinity
+        animation.autoreverses = true
+        animation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        DispatchQueue.main.asyncAfter(deadline: delay) {
+            self.layer.add(animation, forKey: name)
+        }
+    }
 }
 
 

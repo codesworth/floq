@@ -20,6 +20,10 @@
 //  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
 //  IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#if canImport(TOCropViewController)
+import TOCropViewController
+#endif
+
 /**
  An enum containing all of the aspect ratio presets that this view controller supports
  */
@@ -257,6 +261,26 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
         get { return toCropViewController.aspectRatioPickerButtonHidden }
     }
     
+    /**
+     When enabled, hides the 'Done' button on the toolbar.
+
+     Default is false.
+     */
+    public var doneButtonHidden: Bool {
+        set { toCropViewController.doneButtonHidden = newValue }
+        get { return toCropViewController.doneButtonHidden }
+    }
+    
+    /**
+     When enabled, hides the 'Cancel' button on the toolbar.
+
+     Default is false.
+     */
+    public var cancelButtonHidden: Bool {
+        set { toCropViewController.cancelButtonHidden = newValue }
+        get { return toCropViewController.cancelButtonHidden }
+    }
+
     /**
      If `showActivitySheetOnDone` is true, then these activity items will
      be supplied to that UIActivityViewController in addition to the
@@ -557,6 +581,7 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
 
 extension CropViewController {
     fileprivate func setUpCropController() {
+        modalPresentationStyle = .fullScreen
         addChild(toCropViewController)
         transitioningDelegate = (toCropViewController as! UIViewControllerTransitioningDelegate)
         toCropViewController.delegate = self
@@ -573,26 +598,30 @@ extension CropViewController {
         }
         
         if delegate.responds(to: #selector(CropViewControllerDelegate.cropViewController(_:didCropImageToRect:angle:))) {
-            self.onDidCropImageToRect = {[unowned self] rect, angle in
-                delegate.cropViewController!(self, didCropImageToRect: rect, angle: angle)
+            self.onDidCropImageToRect = {[weak self] rect, angle in
+                guard let strongSelf = self else { return }
+                delegate.cropViewController!(strongSelf, didCropImageToRect: rect, angle: angle)
             }
         }
         
         if delegate.responds(to: #selector(CropViewControllerDelegate.cropViewController(_:didCropToImage:withRect:angle:))) {
-            self.onDidCropToRect = {[unowned self] image, rect, angle in
-                delegate.cropViewController!(self, didCropToImage: image, withRect: rect, angle: angle)
+            self.onDidCropToRect = {[weak self] image, rect, angle in
+                guard let strongSelf = self else { return }
+                delegate.cropViewController!(strongSelf, didCropToImage: image, withRect: rect, angle: angle)
             }
         }
         
         if delegate.responds(to: #selector(CropViewControllerDelegate.cropViewController(_:didCropToCircularImage:withRect:angle:))) {
-            self.onDidCropToCircleImage = {[unowned self] image, rect, angle in
-                delegate.cropViewController!(self, didCropToCircularImage: image, withRect: rect, angle: angle)
+            self.onDidCropToCircleImage = {[weak self] image, rect, angle in
+                guard let strongSelf = self else { return }
+                delegate.cropViewController!(strongSelf, didCropToCircularImage: image, withRect: rect, angle: angle)
             }
         }
         
         if delegate.responds(to: #selector(CropViewControllerDelegate.cropViewController(_:didFinishCancelled:))) {
-            self.onDidFinishCancelled = {[unowned self] finished in
-                delegate.cropViewController!(self, didFinishCancelled: finished)
+            self.onDidFinishCancelled = {[weak self] finished in
+                guard let strongSelf = self else { return }
+                delegate.cropViewController!(strongSelf, didFinishCancelled: finished)
             }
         }
     }
