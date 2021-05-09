@@ -23,7 +23,8 @@ import {
   DOC_CLIQS,
   FIELD_COMMENTOR_ID,
   FIELD_PHOTOID,
-  FIELD_cliqCount
+  FIELD_cliqCount,
+  REF_MESSAGEBOARD
 } from "./Constants";
 // tslint:disable-next-line:no-implicit-dependencies
 import { FieldValue } from "@google-cloud/firestore";
@@ -266,6 +267,70 @@ export const notifyForComment = functions.firestore
             data: {
               cliqID: cliqID,
               photoID: photoID,
+              type: COMMENT_ADDED
+            },
+            token: x
+          };
+          messages.push(message);
+          console.log(`Token is is: ${x}`);
+        });
+
+        messages.forEach(message => {
+          promise = admin.messaging().send(message);
+        });
+      }
+    }
+    return promise;
+  });
+
+export const notifyMessageBoard = functions.firestore
+  .document(`${REF_MESSAGEBOARD}/{id}`)
+  .onCreate(async (snap, context) => {
+    const cliqID = snap.get(FIELD_CLIQ_ID);
+    const posterID = snap.get(FIELD_COMMENTOR_ID);
+    const commentor = snap.get(FIELD_COMMENTOR);
+
+    const cliq = await store
+      .collection(REF_FLOQS)
+      .doc(cliqID)
+      .get();
+
+    const cliqName = cliq.get(FIELD_cliqname);
+    let promise = Promise.resolve("Nothing");
+
+    const followers = cliq.get(FIELD_followers);
+    const total = followers.length;
+
+    for (let i = 0; i < total; i++) {
+      const key = followers[i];
+      if (key != posterID) {
+        const tokenSnap = await store.doc(`${REF_TOKENS}/${key}`).get();
+        const tokens = [];
+        const tokdata = tokenSnap.data();
+        for (const t_key of Object.keys(tokdata)) {
+          if (t_key === FIELD_instanceToken) {
+            tokens.push(tokdata[t_key]);
+            continue;
+          }
+          if (typeof tokdata[t_key] === "object") {
+            const tok = tokdata[t_key][FIELD_instanceToken];
+            if (typeof tok === "string") {
+              tokens.push(tok);
+            }
+          }
+        }
+        console.log(!`The tokens are : ${tokens}`);
+
+        const messages = [];
+        tokens.forEach(x => {
+          const message = {
+            notification: {
+              title: "New Message",
+              body: `${commentor} just added a new post to ${cliqName} message board`
+            },
+            data: {
+              cliqID: cliqID,
+              photoID: cliqID,
               type: COMMENT_ADDED
             },
             token: x
