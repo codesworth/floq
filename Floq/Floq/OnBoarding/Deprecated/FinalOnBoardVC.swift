@@ -27,7 +27,7 @@ class FinalOnBoardVC: UIViewController,UITextFieldDelegate {
     }
     
     func saveUserdata(user:User){
-        let userID = AccessToken.current?.userId ?? ""
+        let userID = AccessToken.current?.userID ?? ""
         let url:URL?
         if App.signInMethod == .facebook{
             url  = URL(string: "https://graph.facebook.com/\(userID)/picture?width=400&height=400")

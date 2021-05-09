@@ -29,7 +29,7 @@ extension Auth{
     }
     
     class func deActivateAccount(_ completion:@escaping CompletionHandlers.storage){
-        let credemtial = FacebookAuthProvider.credential(withAccessToken: AccessToken.current?.authenticationToken ?? "")
+        let credemtial = FacebookAuthProvider.credential(withAccessToken: AccessToken.current?.tokenString ?? "")
         auth().signIn(with: credemtial) { (data, err) in
             if let err = err{
                 completion(false,err.localizedDescription)

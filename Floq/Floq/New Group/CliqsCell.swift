@@ -48,6 +48,7 @@ class CliqsCell: UICollectionViewCell {
         likeStack.isHidden = true
         imageview.clipsToBounds = true
         avi.clipsToBounds = true
+        commentlbl.isHidden = true
         mavi5.backgroundColor = .white
         avi.layer.cornerRadius = avi.frame.width / 2
         avi.layer.borderWidth = 2.0
@@ -125,7 +126,7 @@ class CliqsCell: UICollectionViewCell {
             let cmt = cl.count
             commentlbl.text = "\(cmt)"
             if cmts.canHighlightCliq(id: cl.cliqID!){
-                commentButt.image = #imageLiteral(resourceName: "comment_red")
+                commentButt.image = #imageLiteral(resourceName: "comments_white") // #imageLiteral(resourceName: "comment_red")
             }else{
                 commentButt.image = #imageLiteral(resourceName: "comments_white")
             }

@@ -39,7 +39,7 @@
 		38B57DF4234F53DA009A45B2 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B57DF3234F53DA009A45B2 /* IntegrationTests.swift */; };
 		38B57DF7234F5C4A009A45B2 /* PhotoEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B57DF6234F5C4A009A45B2 /* PhotoEngineTest.swift */; };
 		38B57DF9234F5C64009A45B2 /* CliqEngineTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B57DF8234F5C64009A45B2 /* CliqEngineTest.swift */; };
-		38CC9EBA22EF050C00483DC7 /* CommentsInputView copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CC9EB922EF050C00483DC7 /* CommentsInputView copy.swift */; };
+		38CC9EBA22EF050C00483DC7 /* CommentsInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CC9EB922EF050C00483DC7 /* CommentsInputView.swift */; };
 		38CF259022DCCA2D008BEDDF /* FLComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CF258F22DCCA2D008BEDDF /* FLComments.swift */; };
 		38CF259222DD4FD1008BEDDF /* CommentEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CF259122DD4FD1008BEDDF /* CommentEngine.swift */; };
 		38CF259522DFA34E008BEDDF /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CF259422DFA34E008BEDDF /* CommentsVC.swift */; };
@@ -57,7 +57,7 @@
 		38D007CC23BAD492001899A0 /* AuthenticationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38D007CB23BAD492001899A0 /* AuthenticationVC.swift */; };
 		3D072C64242ECAA70088E226 /* Floq.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C62242ECAA70088E226 /* Floq.xcdatamodeld */; };
 		3D072C66242ECAC30088E226 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C65242ECAC30088E226 /* Persistence.swift */; };
-		3D072C69242ECAF50088E226 /* PhotoNotication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C67242ECAF50088E226 /* PhotoNotication.swift */; };
+		3D072C69242ECAF50088E226 /* PhotoNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C67242ECAF50088E226 /* PhotoNotification.swift */; };
 		3D072C6A242ECAF50088E226 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C68242ECAF50088E226 /* CoreDataStack.swift */; };
 		3D072C6E242ED0DC0088E226 /* CommentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C6B242ED0DC0088E226 /* CommentButton.swift */; };
 		3D072C6F242ED0DC0088E226 /* PhotoEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D072C6C242ED0DC0088E226 /* PhotoEmptyView.swift */; };
@@ -208,7 +208,7 @@
 		38B57DF3234F53DA009A45B2 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		38B57DF6234F5C4A009A45B2 /* PhotoEngineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEngineTest.swift; sourceTree = "<group>"; };
 		38B57DF8234F5C64009A45B2 /* CliqEngineTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliqEngineTest.swift; sourceTree = "<group>"; };
-		38CC9EB922EF050C00483DC7 /* CommentsInputView copy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CommentsInputView copy.swift"; sourceTree = "<group>"; };
+		38CC9EB922EF050C00483DC7 /* CommentsInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsInputView.swift; sourceTree = "<group>"; };
 		38CF258F22DCCA2D008BEDDF /* FLComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLComments.swift; sourceTree = "<group>"; };
 		38CF259122DD4FD1008BEDDF /* CommentEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEngine.swift; sourceTree = "<group>"; };
 		38CF259422DFA34E008BEDDF /* CommentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 		38D007CB23BAD492001899A0 /* AuthenticationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVC.swift; sourceTree = "<group>"; };
 		3D072C63242ECAA70088E226 /* Floq.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Floq.xcdatamodel; sourceTree = "<group>"; };
 		3D072C65242ECAC30088E226 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		3D072C67242ECAF50088E226 /* PhotoNotication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoNotication.swift; sourceTree = "<group>"; };
+		3D072C67242ECAF50088E226 /* PhotoNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoNotification.swift; sourceTree = "<group>"; };
 		3D072C68242ECAF50088E226 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		3D072C6B242ED0DC0088E226 /* CommentButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentButton.swift; sourceTree = "<group>"; };
 		3D072C6C242ED0DC0088E226 /* PhotoEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEmptyView.swift; sourceTree = "<group>"; };
@@ -434,7 +434,7 @@
 			isa = PBXGroup;
 			children = (
 				3D072C68242ECAF50088E226 /* CoreDataStack.swift */,
-				3D072C67242ECAF50088E226 /* PhotoNotication.swift */,
+				3D072C67242ECAF50088E226 /* PhotoNotification.swift */,
 				3D072C65242ECAC30088E226 /* Persistence.swift */,
 				3D072C62242ECAA70088E226 /* Floq.xcdatamodeld */,
 				38AA8D6C234FC33C000A7649 /* CommentNotifierService.swift */,
@@ -478,7 +478,7 @@
 			children = (
 				38CF259422DFA34E008BEDDF /* CommentsVC.swift */,
 				3877A9F322E2094B007FBCE3 /* AddCommentVC.swift */,
-				38CC9EB922EF050C00483DC7 /* CommentsInputView copy.swift */,
+				38CC9EB922EF050C00483DC7 /* CommentsInputView.swift */,
 				3877A9FC22E3536A007FBCE3 /* LoadMoreCells.swift */,
 				3877A9FD22E3536A007FBCE3 /* LoadMoreCells.xib */,
 				38CF259622DFA46D008BEDDF /* CommentCell.swift */,
@@ -1052,7 +1052,6 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Floq/Pods-Floq-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework",
-				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/DKCamera/DKCamera.framework",
@@ -1062,13 +1061,23 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseAuth/FirebaseAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCrashlytics/FirebaseCrashlytics.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseDatabase/FirebaseDatabase.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseFirestore/FirebaseFirestore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstanceID/FirebaseInstanceID.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseStorage/FirebaseStorage.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListDiffKit/IGListDiffKit.framework",
 				"${BUILT_PRODUCTS_DIR}/IGListKit/IGListKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/abseil/absl.framework",
@@ -1080,7 +1089,6 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppAuth.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DKCamera.framework",
@@ -1090,13 +1098,23 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreDiagnostics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCrashlytics.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseDatabase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseFirestore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstanceID.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseStorage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMAppAuth.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListDiffKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGListKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/absl.framework",
@@ -1221,7 +1239,7 @@
 				C4A2A44021A22CC1006DFE6E /* PhotoFullScreenVC.swift in Sources */,
 				3877A9FA22E34177007FBCE3 /* Protocols.swift in Sources */,
 				40A1F74820F3052E00DDA0B1 /* FloatLabelTextField.swift in Sources */,
-				3D072C69242ECAF50088E226 /* PhotoNotication.swift in Sources */,
+				3D072C69242ECAF50088E226 /* PhotoNotification.swift in Sources */,
 				38CFAB182288B8AD00D40330 /* Floaty.swift in Sources */,
 				3877A9F922E34177007FBCE3 /* LayoutProperty.swift in Sources */,
 				38AA8D6D234FC33C000A7649 /* CommentNotifierService.swift in Sources */,
@@ -1245,7 +1263,7 @@
 				C434C51121DCBE33003333A1 /* MyCliqsVC.swift in Sources */,
 				C4A2A43B21A22C4A006DFE6E /* FullScreenCell.swift in Sources */,
 				C45CE27421E0CD7C0071C59D /* OnBoardingPVC.swift in Sources */,
-				38CC9EBA22EF050C00483DC7 /* CommentsInputView copy.swift in Sources */,
+				38CC9EBA22EF050C00483DC7 /* CommentsInputView.swift in Sources */,
 				3D43453524B9D2AD00634849 /* CliqMarkerView.swift in Sources */,
 				C45CE27821E0CF010071C59D /* OnBoardInfoTwoVC.swift in Sources */,
 				40A1F74D20F3082800DDA0B1 /* ImagePickerController.swift in Sources */,
@@ -1552,6 +1570,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = Y86G6TS245;
 				INFOPLIST_FILE = Floq/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.21;
 				PRODUCT_BUNDLE_IDENTIFIER = com.floq.Floq;
@@ -1578,6 +1597,7 @@
 				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = Y86G6TS245;
 				INFOPLIST_FILE = Floq/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.21;
 				PRODUCT_BUNDLE_IDENTIFIER = com.floq.Floq;

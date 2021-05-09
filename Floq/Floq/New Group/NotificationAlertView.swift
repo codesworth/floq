@@ -32,6 +32,9 @@ class NotificationAlertView:UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.seafoamBlue
+        dropCorner(15)
+        layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        dropShadow(5, color: .darkGray, 0.4, .init(width: 0, height: 2))
     }
     
     required init?(coder aDecoder: NSCoder) {

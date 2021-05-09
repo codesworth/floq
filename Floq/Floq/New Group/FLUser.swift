@@ -32,6 +32,10 @@ class FLUser{
         cliqs += 1
     }
     
+    func decreaseCount(){
+        cliqs += 1
+    }
+    
     func hasBlocked(user id:String)->Bool{
         return myblockingList.contains(id)
     }

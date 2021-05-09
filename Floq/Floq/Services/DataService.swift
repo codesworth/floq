@@ -155,6 +155,45 @@ class DataService{
         
     }
     
+    func unfollow(cliq: String){
+        let batch = store.batch()
+        let uid = UserDefaults.uid
+        (UIApplication.shared.delegate as! AppDelegate).appUser?.decreaseCount()
+        let clef = floqRef.document(cliq)
+        batch.updateData([Fields.followers.rawValue:FieldValue.arrayRemove([uid])], forDocument: clef)
+        batch.commit { (err) in
+            if let err = err{
+                Logger.log(err)
+            }else{
+                
+            }
+        }
+        let ref = userRef.document(uid)
+        store.runTransaction({ (transaction, errorPointer) -> Any? in
+            let doc:DocumentSnapshot
+            do{
+                try doc = transaction.getDocument(ref)
+            }catch let err as NSError{
+                errorPointer?.pointee = err
+                return nil
+            }
+            
+            guard let count = doc.get(Fields.cliqCount.rawValue) as? Int else{
+                let error = NSError(domain: "Database", code: 404, userInfo: ["msg":"Field not found"])
+                errorPointer?.pointee = error
+                return nil
+            }
+            var cliqs = doc.getDictionary(References.myCliqs.rawValue)
+            cliqs.removeValue(forKey: cliq)
+            transaction.updateData([Fields.cliqCount.rawValue: count - 1, References.myCliqs.rawValue : cliqs], forDocument: ref)
+            return nil
+        }) { (_, err) in
+            if let err = err{
+                print("Transaction Failed with signature: \(err.localizedDescription)")
+            }
+        }
+    }
+    
     func saveNewUserInstanceToken(token:String, complete:@escaping CompletionHandlers.storage){
         
         if let uid = UserDefaults.standard.string(forKey: Fields.uid.rawValue), let deviceID = UIDevice.current.identifierForVendor{

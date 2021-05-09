@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         
-        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         UserDefaults.installed()
@@ -96,10 +96,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         switch App.signInMethod {
         case .facebook:
-            return SDKApplicationDelegate.shared.application(app, open: url, options: options)
+            return ApplicationDelegate.shared.application(app, open: url, options: options)
         case .google:
             
-            return GIDSignIn.sharedInstance().handle(url) 
+            return ((GIDSignIn.sharedInstance()?.handle(url)) != nil)
         default:
             return false
         }
@@ -207,12 +207,13 @@ extension AppDelegate:UNUserNotificationCenterDelegate, MessagingDelegate{
         }
         completionHandler()
     }
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         let prevTok = UserDefaults.instanceToken
-        if prevTok != fcmToken || !UserDefaults.updatedtoken{
-            DataService.main.saveNewUserInstanceToken(token: fcmToken) { (success, err) in
+        if let token = fcmToken, prevTok != token || !UserDefaults.updatedtoken{
+            DataService.main.saveNewUserInstanceToken(token: token) { (success, err) in
                 if success{
-                    UserDefaults.set(fcmToken, for: .instanceToken)
+                    UserDefaults.set(token, for: .instanceToken)
                     UserDefaults.set(true, for: .updatedtoken)
                 }else{
                     Logger.log(err)
@@ -221,9 +222,7 @@ extension AppDelegate:UNUserNotificationCenterDelegate, MessagingDelegate{
         }
     }
     
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received this message: \(remoteMessage.appData.debugDescription)")
-    }
+    
 }
 
 

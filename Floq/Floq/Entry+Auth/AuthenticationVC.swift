@@ -83,7 +83,7 @@ class AuthenticationVC: UIViewController {
         let flogin = LoginManager()
         flogin.logOut()
         
-        flogin.logIn(readPermissions: [.publicProfile, .email], viewController: self) { (result) in
+        flogin.logIn(permissions: [.publicProfile, .email], viewController: self) { (result) in
             switch (result){
             case .cancelled:
                 Logger.log("User Cancelled")
@@ -91,7 +91,7 @@ class AuthenticationVC: UIViewController {
             case .failed(let err):
                 Logger.log(err)
                 break
-            case .success(grantedPermissions: _, declinedPermissions:  _, token: let token):
+            case .success(granted: _, declined:  _, token: let token):
                 
                 self.facebookLogCompletion(token: token)
                 break
@@ -102,7 +102,7 @@ class AuthenticationVC: UIViewController {
     
     func facebookLogCompletion(token:AccessToken){
         
-        let credential = FacebookAuthProvider.credential(withAccessToken: token.authenticationToken)
+        let credential = FacebookAuthProvider.credential(withAccessToken: token.tokenString)
         signInWith(credential)
         
     }
@@ -144,7 +144,7 @@ class AuthenticationVC: UIViewController {
     }
     
     func saveUserdata(user:User){
-        let userID = AccessToken.current?.userId ?? ""
+        let userID = AccessToken.current?.userID ?? ""
         var url:URL?
         if App.signInMethod == .facebook{
             url  = URL(string: "https://graph.facebook.com/\(userID)/picture?width=400&height=400")

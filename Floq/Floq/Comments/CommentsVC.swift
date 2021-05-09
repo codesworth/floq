@@ -28,19 +28,14 @@ class CommentsVC: UIViewController {
     var photoID:String!
     var isMessageBoard = false
     private var engine: CommentEngine!
+    let notificationEngine = CommentNotificationEngine()
     var exhausted = false
     var hasNotch:Bool = false
     private var originalTextFrame:CGRect = .zero
-    var ___frame:CGRect?{
-        didSet{
-            if oldValue == nil && ___frame != nil{
-                originalTextFrame = ___frame!
-            }
-        }
-    }
     
-    
-    
+    private var bottomConstraint: NSLayoutConstraint!
+    private var heightConstraint: NSLayoutConstraint!
+
     private lazy var commentTextBox:UITextField = {
         let textField = UITextField(frame: .zero)
         textField.font = .systemFont(ofSize: 14, weight: .regular)
@@ -114,14 +109,12 @@ class CommentsVC: UIViewController {
     
     func layout(){
         let inset:CGFloat = hasNotch ? 20 : -10
-//        commentView.layout{
-//            $0.bottom == view.bottomAnchor
-//            $0.leading == view.leadingAnchor
-//            $0.trailing == view.trailingAnchor
-//            $0.height |=| (60 + inset)
-//        }
-        //let offset = view.frame.origin.y
-        commentInput.frame = CGRect(x: 12, y: view.bounds.height - (40 + 88 + inset) , width: UIScreen.width - 24, height: 38)
+        commentInput.layout(true){
+                    $0.leading == view.leadingAnchor + 12
+                    $0.trailing == view.trailingAnchor - 12
+                   bottomConstraint = $0.bottom == view.safeAreaLayoutGuide.bottomAnchor
+                   heightConstraint = $0.height |=| 38
+                }
         
         tableView.layout{
             $0.top == view.topAnchor
@@ -134,12 +127,13 @@ class CommentsVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        commentInput.textView.becomeFirstResponder()
+        //commentInput.textView.becomeFirstResponder()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         App.setDomain(.Comment)
+        notificationEngine.endHightlightFor(cliq:cliqID)
         //let inset:CGFloat = hasNotch ? 40 : 0
         //tableView.frame = CGRect(origin: view.frame.origin, size: CGSize(width: view.frame.width, height: view.frame.height - (60 + inset)))
 
@@ -155,11 +149,11 @@ class CommentsVC: UIViewController {
     @objc func keyboardWillShow(_ notification:Notification){
         if let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let height = value.cgRectValue.height
-      
+            bottomConstraint.constant = -height
             UIView.animate(withDuration: 0.8, animations: {
-                self.commentInput.frame.origin.y -= height
+                self.view.layoutIfNeeded()
                 
-                }){_ in self.___frame = self.commentInput.frame }
+                })
             if let tap = tap{
                 view.addGestureRecognizer(tap)
             }
@@ -171,7 +165,7 @@ class CommentsVC: UIViewController {
             let height = value.cgRectValue.height
             keyboardoffset = height
             UIView.animate(withDuration: 0.8) {
-                self.commentInput.frame.origin.y += height
+                self.view.layoutIfNeeded()
             }
             if let tap = tap{
                 view.removeGestureRecognizer(tap)
@@ -308,17 +302,16 @@ extension CommentsVC:CommentProtocol{
 
 extension CommentsVC:CommentInputViewDelegate{
     
-    func shouldAdjustFrame(_ increased:Bool) {
-        //print("Offset is: \(offset)")
-        commentInput.frame.size.height += increased ? 20 : -20
-        commentInput.frame.origin.y += increased ? -20 : 20
-        //commentInput.frame.origin.y = view.frame.height - (keyboardoffset + offset)
-    }
+    func adjustFrame(_ height:CGFloat) {
+            heightConstraint.constant = height
+            UIView.animate(withDuration: 0.35) {
+                self.view.layoutIfNeeded()
+            }
+        }
+
     
     func postTapped(_ text: String) {
         if let _ = App.user{
-            
-            commentInput.frame = CGRect(origin: originalTextFrame.origin, size: CGSize(width: originalTextFrame.width, height: 38))
             commentInput.textView.text = ""
             commentInput.textViewDidChange(commentInput.textView)
             let raw = Comment.Raw(ref: nil, body: text, photoID: photoID, cliqID: cliqID)

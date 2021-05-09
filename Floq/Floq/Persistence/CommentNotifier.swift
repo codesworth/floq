@@ -150,14 +150,11 @@ public struct CommentNotificationEngine{
     }
     
     func canHighlightCliq(id:String)-> Bool{
-        guard let cliq = fetchCliqSub(id), let photos = cliq.photoNotifiers as? Set<PhotoNotifier> else {return false}
+        guard let cliq = fetchCliqSub(id) else {return false}
         if cliq.lastUpdated! < UserDefaults.installTime {
             return false
         }
-        for photo in photos{
-            if photo.canBroadcast{return true}
-        }
-        return false
+        return true
     }
     
     func endHightlightFor(_ photo:String){
@@ -168,6 +165,11 @@ public struct CommentNotificationEngine{
         
     }
     
+    func endHightlightFor(cliq id:String){
+        guard let cliq = fetchCliqSub(id) else {return}
+        cliq.lastUpdated = .init()
+        stack.saveContext()
+    }
     
     
     
