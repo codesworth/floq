@@ -8,8 +8,7 @@
 
 import UIKit
 import SDWebImage.SDImageCache
-import FirebaseStorage.FIRStorage
-
+import FirebaseStorage
 
 extension UIViewController{
     

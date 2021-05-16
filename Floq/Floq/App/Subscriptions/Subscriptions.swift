@@ -31,6 +31,14 @@ class Subscription{
         }
     }
     
+    func post(suscription name:Notification.Name, object:Any? = nil){
+        if let object = object{
+            NotificationCenter.default.post(name: name, object: nil,userInfo:[.info:object])
+        }else{
+            NotificationCenter.default.post(name: name, object: nil)
+        }
+    }
+    
     
 }
 
@@ -38,6 +46,10 @@ class Subscription{
 extension NSObject{
     func subscribeTo(subscription name:Subscription.Name,selector:Selector){
         NotificationCenter.default.addObserver(self, selector: selector, name: NSNotification.Name(name.rawValue), object: nil)
+    }
+    
+    func subscribeTo(subscription name:Notification.Name,selector:Selector){
+        NotificationCenter.default.addObserver(self, selector: selector, name: name, object: nil)
     }
     
     func unsubscribe(){

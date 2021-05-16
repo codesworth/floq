@@ -165,6 +165,7 @@ enum DateFormats:String{
     case long_epoch = "E, d MMM yyyy HH:mm:ss Z"
     case no_year_t = "MMM d, h:mm a"
     case no_year_nt = "MMM d"
+    case time = "HH:mm:ss Z"
 }
 
 

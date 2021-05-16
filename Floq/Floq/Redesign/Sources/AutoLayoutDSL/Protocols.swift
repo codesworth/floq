@@ -9,7 +9,7 @@
 import UIKit
 
 
-protocol LayoutAnchor {
+public protocol LayoutAnchor {
     func constraint(equalTo anchor:Self, constant:CGFloat)->NSLayoutConstraint
     
     func constraint(greaterThanOrEqualTo anchor: Self,
@@ -23,7 +23,7 @@ protocol LayoutAnchor {
 
 
 extension NSLayoutAnchor:LayoutAnchor{
-    @objc func constraint(equalToConstant c: CGFloat) -> NSLayoutConstraint {
+    @objc public func constraint(equalToConstant c: CGFloat) -> NSLayoutConstraint {
         guard let dimension = self as? NSLayoutDimension else{
             fatalError("Unable to cast to NSlayoutDimesion")
         }

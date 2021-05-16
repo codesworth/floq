@@ -12,11 +12,14 @@ import UIKit
 
 public struct AttributedText{
     
+    typealias Attributes = [Attribute]
+    
     fileprivate static var __WHITESPACE = " "
     
     private let attibutedText:NSMutableAttributedString = NSMutableAttributedString()
     public private(set) var attributes:[NSAttributedString.Key:Any] = [:]
     private var string:String = ""
+    
     public init(string:String) {
         self.string = string
     }
@@ -194,7 +197,7 @@ extension AttributedText{
             attrs.updateValue(NSNumber(value: val), forKey: .strikethroughStyle)
             break
         case .underlineStyle(let val):
-            attrs.updateValue(NSNumber(value: val), forKey: .strikethroughStyle)
+            attrs.updateValue(NSNumber(value: val), forKey: .underlineStyle)
             break
         case .link(let link):
             attrs.updateValue(link.linkURL, forKey: .link)
@@ -387,7 +390,7 @@ extension AttributedText{
     public struct TextShadow{
         private let shadow:NSShadow
         
-        public static func dropShadow(offset:CGSize = CGSize(width: 0, height: 2), blur:CGFloat = 2, color:UIColor = .black, opacity:CGFloat = 0.6)->TextShadow{
+        public static func dropShadow(offset:CGSize = .init(width: 0, height: 2), blur:CGFloat = 2, color:UIColor = .black, opacity:CGFloat = 0.6)->TextShadow{
             let shadow = NSShadow()
             shadow.shadowBlurRadius = blur
             shadow.shadowColor = color
@@ -474,7 +477,34 @@ extension AttributedText{
     }
 }
 
+extension NSAttributedString {
+    var attributedString2Html: String? {
+        do {
+            let htmlData = try self.data(
+                from: NSRange(location: 0, length: self.length),
+                documentAttributes:[.documentType: NSAttributedString.DocumentType.html]
+            )
+            return String.init(data: htmlData, encoding: String.Encoding.utf8)
+        } catch {
+            print("error:", error)
+            return nil
+        }
+    }
 
+}
+
+extension String {
+
+    var html2AttributedString: NSAttributedString? {
+        guard let attributedString = try? NSAttributedString(
+            data: Data(self.utf8),
+            options: [.documentType: NSAttributedString.DocumentType.html],
+            documentAttributes: nil
+        ) else { return nil }
+            return attributedString
+        }
+
+}
 
 extension String{
     
@@ -527,7 +557,7 @@ extension String{
                 attrs.updateValue(NSNumber(value: val), forKey: .strikethroughStyle)
                 break
             case .underlineStyle(let val):
-                attrs.updateValue(NSNumber(value: val), forKey: .strikethroughStyle)
+                attrs.updateValue(NSNumber(value: val), forKey: .underlineStyle)
                 break
             case .link(let link):
                 attrs.updateValue(link.linkURL, forKey: .link)

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Arun Nagarajan. All rights reserved.
 //
 import IGListKit
-import FirebaseFirestore.FIRDocumentSnapshot
+import FirebaseFirestore
 
 final class PhotoItem: ListDiffable, Equatable {
     typealias Likers = [String]

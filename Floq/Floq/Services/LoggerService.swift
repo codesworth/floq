@@ -28,4 +28,20 @@ class Logger: NSObject {
     }
     
     static let logMessage = "Error occurred with signature:"
+    
+    static func debug(_ message: CustomStringConvertible, domain: String? = nil){
+        guard let domain = domain else {
+            print("⚠️⚠️⚠️ \(message.description)")
+            return
+        }
+        print("⚠️⚠️⚠️ \(domain.uppercased()) :: \(message.description)")
+    }
+    
+    static func error(_ message: CustomStringConvertible, domain: String? = nil){
+        guard let domain = domain else {
+            print("❌❌❌ \(message.description)")
+            return
+        }
+        print("❌❌❌ \(domain.uppercased()) :: \(message.description)")
+    }
 }

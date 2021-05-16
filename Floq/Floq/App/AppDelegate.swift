@@ -12,11 +12,12 @@ import SDWebImage
 import UserNotifications
 import AVFoundation
 import GoogleSignIn
+import Combine
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-
+    private var cancellable = Set<AnyCancellable>()
     
     var window: UIWindow?
     var mainEngine:CliqEngine!
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isSyncng = false
     var isWatching = false
     var currentLocation:CLLocation?
+    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
@@ -45,15 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         setRootViewController()
         watchForUpdateChanges()
-        //ImageProcess.deleteThumbnails()
-        //let sub = CMTSubscription()
-        //sub.fetchALl()
+        watchForErrors()
         return true
         
     }
     
     
-    
+    func watchForErrors(){
+        appDiContainer.locationManager.locationErrorPublisher.sink { error in
+            SnackBar.makeSncakMessage(text: error.errorMessage)
+        }.store(in: &cancellable)
+    }
     
     func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         print("Memory Warning, Release resources")
@@ -127,8 +131,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let _  = UserDefaults.standard.string(forKey: Fields.uid.rawValue){
             selfSync()
             mainEngine = CliqEngine()
-            let home = UINavigationController(rootViewController: HomeVC())
-            window?.rootViewController = home
+            let home = appDiContainer.homeViewController
+            let base = UINavigationController(rootViewController: home)
+            window?.rootViewController = base
             watchForUpdateChanges()
             
         }else{

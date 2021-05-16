@@ -181,6 +181,13 @@ extension String {
 }
 
 
+extension Optional where Wrapped == String {
+    var exact: Wrapped {
+        guard let string = self else { return "" }
+        return string
+    }
+}
+
 
 extension Int{
     static var largest:Int{

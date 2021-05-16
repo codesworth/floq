@@ -9,23 +9,23 @@
 import UIKit
 
 
-struct LayoutProperty<Anchor:LayoutAnchor> {
+public struct LayoutProperty<Anchor:LayoutAnchor> {
     fileprivate let anchor:Anchor
 }
 
-class LayoutProxy{
+public class LayoutProxy{
     
-    lazy var leading = property(with: view.leadingAnchor)
-    lazy var trailing = property(with: view.trailingAnchor)
-    lazy var top = property(with: view.topAnchor)
-    lazy var bottom = property(with: view.bottomAnchor)
-    lazy var width = property(with: view.widthAnchor)
-    lazy var height = property(with: view.heightAnchor)
-    lazy var centerX = property(with: view.centerXAnchor)
-    lazy var centerY = property(with: view.centerYAnchor)
+    public lazy var leading = property(with: view.leadingAnchor)
+    public lazy var trailing = property(with: view.trailingAnchor)
+    public lazy var top = property(with: view.topAnchor)
+    public lazy var bottom = property(with: view.bottomAnchor)
+    public lazy var width = property(with: view.widthAnchor)
+    public lazy var height = property(with: view.heightAnchor)
+    public lazy var centerX = property(with: view.centerXAnchor)
+    public lazy var centerY = property(with: view.centerYAnchor)
     private let view: UIView
     
-    init(view: UIView) {
+    public init(view: UIView) {
         self.view = view
     }
     
@@ -42,7 +42,7 @@ extension LayoutProperty {
     
     
     @discardableResult
-    func equal(to otherAnchor: Anchor, offsetBy constant: CGFloat = 0)->NSLayoutConstraint {
+    public func equal(to otherAnchor: Anchor, offsetBy constant: CGFloat = 0)->NSLayoutConstraint {
         let constraint = anchor.constraint(equalTo: otherAnchor,
                           constant: constant)
         constraint.isActive = true
@@ -50,7 +50,7 @@ extension LayoutProperty {
     }
     
     @discardableResult
-    func greaterThanOrEqual(to otherAnchor: Anchor,
+    public func greaterThanOrEqual(to otherAnchor: Anchor,
                             offsetBy constant: CGFloat = 0)->NSLayoutConstraint {
         let constraint = anchor.constraint(greaterThanOrEqualTo: otherAnchor,
                           constant: constant)
@@ -59,7 +59,7 @@ extension LayoutProperty {
     }
     
     @discardableResult
-    func lessThanOrEqual(to otherAnchor: Anchor,
+    public func lessThanOrEqual(to otherAnchor: Anchor,
                          offsetBy constant: CGFloat = 0)->NSLayoutConstraint {
         let constraint = anchor.constraint(lessThanOrEqualTo: otherAnchor,
                           constant: constant)
@@ -68,7 +68,7 @@ extension LayoutProperty {
     }
     
     @discardableResult
-    func equal(to constant:CGFloat)->NSLayoutConstraint{
+    public func equal(to constant:CGFloat)->NSLayoutConstraint{
         let constraint = anchor.constraint(equalToConstant: constant)
         constraint.isActive = true
         return constraint

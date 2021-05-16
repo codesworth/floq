@@ -9,46 +9,46 @@
 import UIKit
 
 
-func +<A: LayoutAnchor>(lhs: A, rhs: CGFloat) -> (A, CGFloat) {
+public func +<A: LayoutAnchor>(lhs: A, rhs: CGFloat) -> (A, CGFloat) {
     return (lhs, rhs)
 }
 
-func -<A: LayoutAnchor>(lhs: A, rhs: CGFloat) -> (A, CGFloat) {
+public func -<A: LayoutAnchor>(lhs: A, rhs: CGFloat) -> (A, CGFloat) {
     return (lhs, -rhs)
 }
 
 
 @discardableResult
-func ==<A: LayoutAnchor>(lhs: LayoutProperty<A>,
+public func ==<A: LayoutAnchor>(lhs: LayoutProperty<A>,
                          rhs: (A, CGFloat))->NSLayoutConstraint {
     return lhs.equal(to: rhs.0, offsetBy: rhs.1)
 }
 
 @discardableResult
-func ==<A: LayoutAnchor>(lhs: LayoutProperty<A>, rhs: A)->NSLayoutConstraint {
+public func ==<A: LayoutAnchor>(lhs: LayoutProperty<A>, rhs: A)->NSLayoutConstraint {
     return lhs.equal(to: rhs)
 }
 
 
 @discardableResult
-func >=<A: LayoutAnchor>(lhs: LayoutProperty<A>,
+public func >=<A: LayoutAnchor>(lhs: LayoutProperty<A>,
                          rhs: (A, CGFloat))->NSLayoutConstraint {
     return lhs.greaterThanOrEqual(to: rhs.0, offsetBy: rhs.1)
 }
 
 @discardableResult
-func >=<A: LayoutAnchor>(lhs: LayoutProperty<A>, rhs: A)->NSLayoutConstraint {
+public func >=<A: LayoutAnchor>(lhs: LayoutProperty<A>, rhs: A)->NSLayoutConstraint {
     return lhs.greaterThanOrEqual(to: rhs)
 }
 
 @discardableResult
-func <=<A: LayoutAnchor>(lhs: LayoutProperty<A>,
+public func <=<A: LayoutAnchor>(lhs: LayoutProperty<A>,
                          rhs: (A, CGFloat))->NSLayoutConstraint {
     return lhs.lessThanOrEqual(to: rhs.0, offsetBy: rhs.1)
 }
 
 @discardableResult
-func <=<A: LayoutAnchor>(lhs: LayoutProperty<A>, rhs: A)->NSLayoutConstraint {
+public func <=<A: LayoutAnchor>(lhs: LayoutProperty<A>, rhs: A)->NSLayoutConstraint {
     return lhs.lessThanOrEqual(to: rhs)
 }
 
@@ -61,12 +61,12 @@ infix operator |=| : DefaultPrecedence
 infix operator -- : LexicalArithmeticDisambiguityPrecedence
 
 @discardableResult
-func |=|<A:LayoutAnchor>(lhs: LayoutProperty<A>, rhs: CGFloat)->NSLayoutConstraint{
+public func |=|<A:LayoutAnchor>(lhs: LayoutProperty<A>, rhs: CGFloat)->NSLayoutConstraint{
     return lhs.equal(to: rhs)
     
 }
 
-func --(lhs:NSLayoutConstraint, rhs:String){
+public func --(lhs:NSLayoutConstraint, rhs:String){
     lhs.identifier = rhs
 }
 

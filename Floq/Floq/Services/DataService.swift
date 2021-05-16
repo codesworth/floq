@@ -9,7 +9,6 @@
 import FirebaseFirestore
 import FirebaseStorage
 import FirebaseAuth
-
 import CoreLocation
 import SDWebImage
 
@@ -104,7 +103,7 @@ class DataService{
     
     func cleanUp(uid:String){
         let rtepData:Aliases.dictionary = [Fields.username.rawValue:"Floq user",Fields.profileImg.rawValue:"placeholder",Fields.deleted.rawValue:true,Fields.dateDeleted.rawValue:Date()]
-        userRef.document(uid).updateData(rtepData)
+        userRef.document(uid).updateData(rtepData, completion: nil)
         Storage.reference(.userProfilePhotos).child(uid).delete { (err) in
             Logger.log(err)
         }
@@ -151,7 +150,7 @@ class DataService{
     
     func removeCliq(_ key:String){
         let uid = UserDefaults.standard.string(forKey: Fields.uid.rawValue)!
-        userRef.document(uid).collection(.myCliqs).document(key).delete()
+        userRef.document(uid).collection(.myCliqs).document(key).delete(completion: nil)
         
     }
     
@@ -382,7 +381,7 @@ class DataService{
     }
     
     func updatelastInteraction(){
-        userRef.document(UserDefaults.uid).updateData(["lastInteraction":FieldValue.serverTimestamp()])
+        userRef.document(UserDefaults.uid).updateData(["lastInteraction":FieldValue.serverTimestamp()], completion: nil)
     }
     
     func getFollowers(ids:Set<String>, handler:@escaping CompletionHandlers.followers){
