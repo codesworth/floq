@@ -11,7 +11,7 @@ import UIKit
 class FloqHomeController: CardContainerViewController {
     private enum Constants {
         static let topViewHeight: CGFloat = 60.0
-        static let summaryCardHeight: CGFloat = 229.0
+        static let discoveryCardHeight: CGFloat = 207.0
         static let activityCardHeight: CGFloat = 142.0
         static let readinessCardHeight: CGFloat = 228.0
     }
@@ -20,7 +20,7 @@ class FloqHomeController: CardContainerViewController {
 
     private var cardFactories: [CardFactory] {
         return [
-            DiscoveryCardFactory(viewModel: homeViewModel.discoveryCardViewModel)
+            HorizontalCardContainerFactory(cards: [DiscoveryCardFactory(viewModel: homeViewModel.discoveryCardViewModel)], cardHeight: Constants.discoveryCardHeight)
         ]
     }
 
@@ -49,7 +49,8 @@ class FloqHomeController: CardContainerViewController {
     }
 
     private func setupUI() {
-       
+        view.backgroundColor = .black
+        title = "home_title".localize()
     }
 
 

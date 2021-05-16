@@ -1,18 +1,20 @@
 import MagazineLayout
 import UIKit
 
-private enum Constants {
+
+
+enum CardStyleConstants {
     static let topViewHeight: CGFloat = 0.0
     static let topViewLeftMargin: CGFloat = 16.0
     static let topViewRightMargin: CGFloat = 16.0
     static let topViewTopMargin: CGFloat = 0.0
-    static let collectionViewTopMargin: CGFloat = 32.0
+    static let collectionViewTopMargin: CGFloat = 16.0
     static let collectionViewLeftMargin: CGFloat = 0.0
     static let collectionViewRightMargin: CGFloat = 0.0
     static let collectionViewBottomMargin: CGFloat = 0.0
     static let defaultVerticalSpacingBetweenCards: CGFloat = 12.0
-    static let cardLeftMargin: CGFloat = 12.0
-    static let cardRightMargin: CGFloat = 12.0
+    static let cardLeftMargin: CGFloat = 8.0
+    static let cardRightMargin: CGFloat = 8.0
     static let cardTopMargin: CGFloat = 0.0
     static let cardBottomMargin: CGFloat = 0.0
 }
@@ -26,7 +28,7 @@ open class CardContainerViewController: UIViewController,
 
     private var animatorCardCascade: AnimatorCollectionTable?
 
-    private var verticalCardSpacing: CGFloat = Constants.defaultVerticalSpacingBetweenCards
+    private var verticalCardSpacing: CGFloat = CardStyleConstants.defaultVerticalSpacingBetweenCards
 
     public var viewModel: CardContainerViewModelProtocol?
     public var cards: [CardFactory]? {
@@ -66,7 +68,7 @@ open class CardContainerViewController: UIViewController,
         self.cards = cards
         self.viewModel = viewModel
 
-        self.verticalCardSpacing = verticalCardSpacing ?? Constants.defaultVerticalSpacingBetweenCards
+        self.verticalCardSpacing = verticalCardSpacing ?? CardStyleConstants.defaultVerticalSpacingBetweenCards
     }
 
     @available(*, unavailable)
@@ -163,20 +165,20 @@ extension CardContainerViewController {
             [
                 topView.topAnchor.constraint(
                     equalTo: view.safeAreaLayoutGuide.topAnchor,
-                    constant: Constants.topViewTopMargin
+                    constant: CardStyleConstants.topViewTopMargin
                 ),
                 topView.leadingAnchor.constraint(
                     equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                    constant: Constants.topViewLeftMargin
+                    constant: CardStyleConstants.topViewLeftMargin
                 ),
                 topView.trailingAnchor.constraint(
                     equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                    constant: -Constants.topViewRightMargin
+                    constant: -CardStyleConstants.topViewRightMargin
                 )
             ]
         )
 
-        topViewHeightConstraint = topView.heightAnchor.constraint(equalToConstant: Constants.topViewHeight)
+        topViewHeightConstraint = topView.heightAnchor.constraint(equalToConstant: CardStyleConstants.topViewHeight)
         topViewHeightConstraint.isActive = true
 
         NSLayoutConstraint.activate(
@@ -184,15 +186,15 @@ extension CardContainerViewController {
                 collectionView.topAnchor.constraint(equalTo: topView.bottomAnchor),
                 collectionView.leadingAnchor.constraint(
                     equalTo: view.safeAreaLayoutGuide.leadingAnchor,
-                    constant: Constants.collectionViewLeftMargin
+                    constant: CardStyleConstants.collectionViewLeftMargin
                 ),
                 collectionView.trailingAnchor.constraint(
                     equalTo: view.safeAreaLayoutGuide.trailingAnchor,
-                    constant: -Constants.collectionViewRightMargin
+                    constant: -CardStyleConstants.collectionViewRightMargin
                 ),
                 collectionView.bottomAnchor.constraint(
                     equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                    constant: -Constants.collectionViewBottomMargin
+                    constant: -CardStyleConstants.collectionViewBottomMargin
                 )
             ]
         )
@@ -206,10 +208,10 @@ extension CardContainerViewController: UICollectionViewDelegateMagazineLayout {
         insetsForItemsInSectionAtIndex _: Int
     ) -> UIEdgeInsets {
         UIEdgeInsets(
-            top: Constants.cardTopMargin,
-            left: Constants.cardLeftMargin,
-            bottom: Constants.cardBottomMargin,
-            right: Constants.cardRightMargin
+            top: CardStyleConstants.cardTopMargin,
+            left: CardStyleConstants.cardLeftMargin,
+            bottom: CardStyleConstants.cardBottomMargin,
+            right: CardStyleConstants.cardRightMargin
         )
     }
 
@@ -217,7 +219,7 @@ extension CardContainerViewController: UICollectionViewDelegateMagazineLayout {
         _: UICollectionView,
         layout _: UICollectionViewLayout,
         insetsForSectionAtIndex _: Int
-    ) -> UIEdgeInsets { UIEdgeInsets(top: Constants.collectionViewTopMargin, left: 0, bottom: 0, right: 0) }
+    ) -> UIEdgeInsets { UIEdgeInsets(top: CardStyleConstants.collectionViewTopMargin, left: 0, bottom: 0, right: 0) }
 
     public func collectionView(
         _: UICollectionView,

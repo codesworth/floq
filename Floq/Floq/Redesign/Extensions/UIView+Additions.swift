@@ -25,4 +25,17 @@ public extension UIView {
 
         pin(to: superview, insets: insets)
     }
+    
+    func addCardStyle(){
+        self.dropCorner(5)
+        dropShadow(3, color: .charcoal, 0.5, .init(width: 0, height: 2))
+    }
+    
+    func addOverlayCardStyle(){
+        let view = PassthroughView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        addSubview(view)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.pin(to: self)
+    }
 }

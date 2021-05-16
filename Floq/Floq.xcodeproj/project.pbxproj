@@ -138,6 +138,9 @@
 		C4D1E09721DB989000C5ED9A /* UserProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1E09621DB989000C5ED9A /* UserProfileVC.swift */; };
 		C4D1E09921DB98D200C5ED9A /* UserSettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D1E09821DB98D200C5ED9A /* UserSettingsTVC.swift */; };
 		C4D4F8C721FA4B3A00A26797 /* PhotosEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D4F8C621FA4B3A00A26797 /* PhotosEngine.swift */; };
+		DA17878226515ED800B42EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA17878126515ED800B42EE3 /* Localizable.strings */; };
+		DA1787842651638000B42EE3 /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1787832651638000B42EE3 /* String+Localize.swift */; };
+		DA178788265167D700B42EE3 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA178787265167D700B42EE3 /* PassthroughView.swift */; };
 		DA765D902650ABF700E898FF /* ProximalCliqModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765D8F2650ABF700E898FF /* ProximalCliqModelMapper.swift */; };
 		DA765D932651139F00E898FF /* FloqDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765D922651139F00E898FF /* FloqDIContainer.swift */; };
 		DA765D962651187600E898FF /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765D952651187600E898FF /* ViewModelFactory.swift */; };
@@ -349,6 +352,9 @@
 		C4D1E09621DB989000C5ED9A /* UserProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileVC.swift; sourceTree = "<group>"; };
 		C4D1E09821DB98D200C5ED9A /* UserSettingsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsTVC.swift; sourceTree = "<group>"; };
 		C4D4F8C621FA4B3A00A26797 /* PhotosEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosEngine.swift; sourceTree = "<group>"; };
+		DA17878126515ED800B42EE3 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		DA1787832651638000B42EE3 /* String+Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localize.swift"; sourceTree = "<group>"; };
+		DA178787265167D700B42EE3 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
 		DA765D8F2650ABF700E898FF /* ProximalCliqModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCliqModelMapper.swift; sourceTree = "<group>"; };
 		DA765D922651139F00E898FF /* FloqDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FloqDIContainer.swift; path = Floq/Redesign/Data/FloqDIContainer.swift; sourceTree = SOURCE_ROOT; };
 		DA765D952651187600E898FF /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
@@ -883,6 +889,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		DA17878026515E7800B42EE3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DA17878126515ED800B42EE3 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		DA765D912651136900E898FF /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -912,6 +926,7 @@
 		DAC642B52647813600A2B3CF /* Redesign */ = {
 			isa = PBXGroup;
 			children = (
+				DA17878026515E7800B42EE3 /* Resources */,
 				DA765D942651151700E898FF /* Factories */,
 				DA765D912651136900E898FF /* DI */,
 				DAC643082648385E00A2B3CF /* Data */,
@@ -967,6 +982,7 @@
 				DAC642E12647859E00A2B3CF /* Identifiable.swift */,
 				DAC642DB2647846F00A2B3CF /* UIView+Additions.swift */,
 				DAC642DD2647850100A2B3CF /* UICollectionView+Dequeue.swift */,
+				DA1787832651638000B42EE3 /* String+Localize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1048,6 +1064,7 @@
 			children = (
 				DAC642F2264808E800A2B3CF /* DiscoveryCardView.swift */,
 				DA765D9D26513F1E00E898FF /* DiscoveryCardFactory.swift */,
+				DA178787265167D700B42EE3 /* PassthroughView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1312,6 +1329,7 @@
 				38CF259922DFA46D008BEDDF /* CommentCell.xib in Resources */,
 				C4A2A43721A22C4A006DFE6E /* FullScreenCell.xib in Resources */,
 				40AA29BC1E8891E900200A3F /* Main.storyboard in Resources */,
+				DA17878226515ED800B42EE3 /* Localizable.strings in Resources */,
 				C4A2A43C21A22C4A006DFE6E /* PhotoCell.xib in Resources */,
 				38D007CA23BAA30B001899A0 /* SummerFont-Light.otf in Resources */,
 				C4D1E08A21D7894500C5ED9A /* FloqCell.xib in Resources */,
@@ -1521,6 +1539,7 @@
 				C43B8D57220073EB003B7A00 /* NotificationAlertView.swift in Sources */,
 				38CF259222DD4FD1008BEDDF /* CommentEngine.swift in Sources */,
 				DAC642DE2647850100A2B3CF /* UICollectionView+Dequeue.swift in Sources */,
+				DA1787842651638000B42EE3 /* String+Localize.swift in Sources */,
 				C4A2A42421A22A10006DFE6E /* GridPhotoSection.swift in Sources */,
 				407997FE1FDCE0ED00AAE42A /* LabelCell.swift in Sources */,
 				C4A28E4321E01EBB00ADA02D /* ActiveSectionCell.swift in Sources */,
@@ -1589,6 +1608,7 @@
 				DAC642CD2647830F00A2B3CF /* ViewWrapperCell.swift in Sources */,
 				38D007CC23BAD492001899A0 /* AuthenticationVC.swift in Sources */,
 				C43B8D5522006B30003B7A00 /* UpdateInfo.swift in Sources */,
+				DA178788265167D700B42EE3 /* PassthroughView.swift in Sources */,
 				C416EC9621D623AB00ECEE2C /* CustomAlbum.swift in Sources */,
 				3D43453324B9CC8300634849 /* CliqMapVC.swift in Sources */,
 				C4A2A43A21A22C4A006DFE6E /* SupportViews.swift in Sources */,

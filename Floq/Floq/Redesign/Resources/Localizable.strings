@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Floq
+
+  Created by ES-Shadrach on 16/05/2021.
+  Copyright © 2021 Arun Nagarajan. All rights reserved.
+*/
+
+"discovery_card_title" = "Discover";
+"cliqs_plural" = "cliqs";
+"cliqs_singular" = "cliq";
+"home_title" = "Floq";
