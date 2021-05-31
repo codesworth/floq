@@ -7,22 +7,18 @@
 //
 
 import UIKit
+import Combine
 
 class FloqHomeController: CardContainerViewController {
     private enum Constants {
         static let topViewHeight: CGFloat = 60.0
-        static let discoveryCardHeight: CGFloat = 207.0
-        static let activityCardHeight: CGFloat = 142.0
-        static let readinessCardHeight: CGFloat = 228.0
+        static let discoveryCardHeight: CGFloat = 206.0
+        static let myCliqsCardHeight: CGFloat = 200.0
+        static let cardsHeight: CGFloat = 206.0
     }
     
+    private var cancellables = Set<AnyCancellable>()
     private var homeViewModel: FloqHomeViewModelProtocol { viewModel as! FloqHomeViewModelProtocol }
-
-    private var cardFactories: [CardFactory] {
-        return [
-            HorizontalCardContainerFactory(cards: [DiscoveryCardFactory(viewModel: homeViewModel.discoveryCardViewModel)], cardHeight: Constants.discoveryCardHeight)
-        ]
-    }
 
     public init() {
         fatalError("init() should never be used")
@@ -36,10 +32,9 @@ class FloqHomeController: CardContainerViewController {
         self.init(nibName: nil, bundle: nil)
 
         self.viewModel = viewModel
-        self.cards = cardFactories
-
-        bind()
+        self.cards = buildCards()
         setupUI()
+        bind()
 
     }
 
@@ -47,23 +42,66 @@ class FloqHomeController: CardContainerViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    private func setupUI() {
-        view.backgroundColor = .black
-        title = "home_title".localize()
-    }
-
-
-    private func updateLayout() {
-        cards = cardFactories
-    }
-
-    private var floqViewModel: FloqHomeViewModelProtocol? {
-        return viewModel as? FloqHomeViewModelProtocol
-    }
+    
 
     private func bind() {
+        homeViewModel.latestCliqImageReference.sink { [weak self] _ in
+            self?.updateLayout()
+        }.store(in: &cancellables)
         
+        homeViewModel.myCliqCount.sink { [ weak self ] _ in
+            self?.updateLayout()
+        }.store(in: &cancellables)
     }
+
+    private func setupUI() {
+        title = "home_title".localize()
+        let floaty = Floaty()
+        floaty.buttonColor = .clear
+        floaty.buttonImage = .icon_app_rounded
+        
+        floaty.addItem("Create a Cliq", icon:.icon_app, handler: { [weak self] item in
+            let addvc = appDiContainer.createCliqViewController
+            self?.navigationController?.pushViewController(addvc, animated: true)
+        })
+        
+        floaty.addItem("Profile", icon:.placeholder, handler: { item in
+            if let vc = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: UserProfileVC.self)) as? UserProfileVC{
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        })
+        
+        view.addSubview(floaty)
+        view.backgroundColor = .black
+    }
+
+    private func buildCards() -> [CardFactory] {
+        let cards:[CardFactory] = [
+            HorizontalCardContainerFactory(cards: [DiscoveryCardFactory(viewModel: homeViewModel.discoveryCardViewModel)], cardHeight: Constants.discoveryCardHeight),
+            HorizontalCardContainerFactory(cards: [HorizontalCliqCardFactory(with: makeUserHomeCliqUiModel())], cardHeight: Constants.myCliqsCardHeight),
+            HorizontalCardContainerFactory(cards: [
+                NotificationCardFactory(with: .init(notifications: 10)),
+                AccountSettingsCardFactory(with: .init(accountUid: UserDefaults.uid))
+            ], cardHeight: Constants.cardsHeight)
+        ]
+        
+        
+        return cards
+    }
+
+    private func makeUserHomeCliqUiModel() -> HorizontalCliqCardView.UIModel {
+        let count = homeViewModel.myCliqCount.value
+        let trailing = count == 1 ? "cliqs_singular".localize() : "cliqs_plural".localize()
+        let text = "\(count) \(trailing)"
+        return .init(title: "my_cliqs".localize(), cliqsText: text, imageReference: homeViewModel.latestCliqImageReference.value, showEmpty: count == .zero) { [weak self ] in
+            let myCliqsVc = appDiContainer.userCliqViewController
+            self?.navigationController?.pushViewController(myCliqsVc, animated: true)
+        }
+    }
+    
+    private func updateLayout() {
+        cards = buildCards()
+    }
+
 
 }

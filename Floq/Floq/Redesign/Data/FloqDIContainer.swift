@@ -17,7 +17,10 @@ class FloqDIContainer: NSObject {
     private var viewModelFactory = ViewModelFactory()
     private var viewControllerFactory = ViewControllerFactory()
     var locationManager = LocationManager()
-    
+    private var userId: String { UserDefaults.uid }
+    private lazy var globalCliqRepository: UserCliqDataRepository = {
+        dependencyFactory.userCliqDataRepository(uid: userId)
+    }()
     
     private override init() { super.init() }
     
@@ -29,8 +32,25 @@ class FloqDIContainer: NSObject {
     var homeViewController: FloqHomeController {
         viewControllerFactory.makeHomeViewController(
             viewModel: viewModelFactory.floqHomeViewModel(
-                discoveryViewModel: discoveryCardViewModel
+                discoveryViewModel: discoveryCardViewModel,
+                userRepository: dependencyFactory.userDataRepository(),
+                userCliqRepository: globalCliqRepository
             )
+        )
+    }
+    
+    var userCliqViewController: UserCliqViewController {
+        viewControllerFactory.makeUserCliqViewController(
+            viewModel: viewModelFactory.userCliqViewModel(
+                userCliqRepository: globalCliqRepository
+            )
+        )
+    }
+    
+    var createCliqViewController: CreateCliqViewController {
+        viewControllerFactory.makeCreateCliqviewController(
+            viewModel: viewModelFactory.createCliqViewModel(repository: dependencyFactory.createCliqDataRepository(uid: userId),
+                                                            locationManager: locationManager)
         )
     }
     

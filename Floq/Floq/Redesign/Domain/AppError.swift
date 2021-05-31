@@ -9,7 +9,13 @@
 import Foundation
 
 struct AppError: Error, CustomStringConvertible, CustomDebugStringConvertible {
+    
+    enum ErrorType {
+        case locationUnAvailble, noNetworkConnection, other
+    }
+    
     var errorMessage: String
+    var errorType: ErrorType = .other
     
     var description: String {
         errorMessage

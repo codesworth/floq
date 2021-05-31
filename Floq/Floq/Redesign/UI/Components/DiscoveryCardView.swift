@@ -62,6 +62,12 @@ final class DiscoveryCardView: UIView, Insetable {
             let region = MKCoordinateRegion(center:coordinate, span: span)
             self.mapView.setRegion(region, animated: true)
         }.store(in: &cancellable)
+        
+        viewModel.$proximalCliqs.sink { [ weak self ] values in
+            guard let self = self, !values.isEmpty else { return }
+            self.cliqsLabel.text = "\(values.count) cliq\(values.count == 1 ? "" : "s")"
+        }.store(in: &cancellable)
+        
     }
 
 }

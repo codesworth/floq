@@ -242,19 +242,25 @@ extension UIColor{
 
 extension UIAlertController{
     
-    class func createDefaultAlert(_ title:String, _ message:String, _ style:UIAlertController.Style = .alert, _ actionTitle:String, _ actionStyle:UIAlertAction.Style = .default, _ handler: CompletionHandlers.alert?) -> UIAlertController{
+    class func createDefaultAlert(_ title:String, _ message:String, _ style:UIAlertController.Style = .alert, _ actionTitle:String, _ actionStyle:UIAlertAction.Style = .default, tintColor: UIColor? = nil, _ handler: CompletionHandlers.alert?) -> UIAlertController{
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         let action = UIAlertAction(title: actionTitle, style: actionStyle, handler: handler)
         alert.addAction(action)
+        if tintColor != nil {
+            alert.view.tintColor = tintColor
+        }
         return alert
     }
     
-    class func createDefaultAlert(_ title:Info.Titles, _ message:Info.Messages, _ style:UIAlertController.Style = .alert, _ actionTitle:Info.Action, _ actionStyle:UIAlertAction.Style = .default, _ handler: CompletionHandlers.alert?) -> UIAlertController{
+    class func createDefaultAlert(_ title:Info.Titles, _ message:Info.Messages, _ style:UIAlertController.Style = .alert, _ actionTitle:Info.Action, _ actionStyle:UIAlertAction.Style = .default, tintColor: UIColor? = nil, _ handler: CompletionHandlers.alert?) -> UIAlertController{
         
         let alert = UIAlertController(title: title.rawValue, message: message.rawValue, preferredStyle: style)
         let action = UIAlertAction(title: actionTitle.rawValue, style: actionStyle, handler: handler)
         alert.addAction(action)
+        if tintColor != nil {
+            alert.view.tintColor = tintColor
+        }
         return alert
     }
 }

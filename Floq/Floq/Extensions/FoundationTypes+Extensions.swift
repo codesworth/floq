@@ -199,4 +199,8 @@ extension CGFloat{
     static func Angle(_ degree:CGFloat)-> CGFloat{
         return (.pi * degree) / 180
     }
+
 }
+
+
+

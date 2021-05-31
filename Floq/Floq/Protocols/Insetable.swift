@@ -36,6 +36,14 @@ extension Insetable{
         return 2 * horizontalInset
     }
     
+    var halvedVerticalInset:CGFloat{
+        return 0.5 * verticalInset
+    }
+    
+    var halvedHorizontalInset:CGFloat{
+        return 0.5 * horizontalInset
+    }
+    
     func verticalInsetBy(_ value:CGFloat)->CGFloat{
         return verticalInset * value
     }
@@ -43,5 +51,6 @@ extension Insetable{
     func horizontalInsetBy(_ value:CGFloat)->CGFloat{
         return horizontalInset * value
     }
+    
     
 }

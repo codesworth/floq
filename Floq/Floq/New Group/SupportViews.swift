@@ -131,7 +131,10 @@ class AvatarImageView:UIImageView{
         contentMode = .scaleAspectFill
     }
     
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        commonSetup()
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

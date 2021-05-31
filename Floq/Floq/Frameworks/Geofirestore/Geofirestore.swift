@@ -106,11 +106,11 @@ public class GeoFirestore {
     }
     
     
-    public func setLocation(location: CLLocation, forDocumentWithID documentID: String, addTimeStamp:Bool, completion: GFSCompletionBlock? = nil) {
-        if CLLocationCoordinate2DIsValid(location.coordinate) {
-            let lat = location.coordinate.latitude
-            let lon = location.coordinate.longitude
-            if let geoHash = GFGeoHash(location: location.coordinate).geoHashValue {
+    public func setLocation(location: CLLocationCoordinate2D, forDocumentWithID documentID: String, addTimeStamp:Bool, completion: GFSCompletionBlock? = nil) {
+        if CLLocationCoordinate2DIsValid(location) {
+            let lat = location.latitude
+            let lon = location.longitude
+            if let geoHash = GFGeoHash(location: location).geoHashValue {
                 if addTimeStamp{
                     self.collectionRef.document(documentID).setData(["l": [lat, lon], "g": geoHash,Fields.timestamp.rawValue:FieldValue.serverTimestamp()], mergeFields: ["g", "l",Fields.timestamp.rawValue], completion: completion)
                 }else{

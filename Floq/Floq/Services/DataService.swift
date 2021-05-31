@@ -288,7 +288,7 @@ class DataService{
                             
                         } else {
                             //geofire.setLocation(location: locaion, forDocumentWithID: filePath)
-                            geofire.setLocation(location: location, forDocumentWithID: filePath, addTimeStamp: true, completion: nil)
+                            geofire.setLocation(location: location.coordinate, forDocumentWithID: filePath, addTimeStamp: true, completion: nil)
                             onFinish(true,nil)
                         }
                     })

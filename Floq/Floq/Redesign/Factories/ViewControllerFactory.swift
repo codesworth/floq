@@ -10,7 +10,21 @@ import Foundation
 
 class ViewControllerFactory {
     
-    func makeHomeViewController(viewModel: FloqHomeViewModelProtocol) -> FloqHomeController {
+    func makeHomeViewController(
+        viewModel: FloqHomeViewModelProtocol
+    ) -> FloqHomeController {
+        .init(with: viewModel)
+    }
+    
+    func makeUserCliqViewController(
+        viewModel: UserCliqViewModelProtocol
+    ) -> UserCliqViewController {
+        .init(with: viewModel)
+    }
+    
+    func makeCreateCliqviewController(
+        viewModel: CreateCliqViewModelProtocol
+    ) -> CreateCliqViewController {
         .init(with: viewModel)
     }
 }

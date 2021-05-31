@@ -141,6 +141,21 @@
 		DA17878226515ED800B42EE3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA17878126515ED800B42EE3 /* Localizable.strings */; };
 		DA1787842651638000B42EE3 /* String+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1787832651638000B42EE3 /* String+Localize.swift */; };
 		DA178788265167D700B42EE3 /* PassthroughView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA178787265167D700B42EE3 /* PassthroughView.swift */; };
+		DA32779C265876B800BB1C3E /* DiscoveryPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32779B265876B800BB1C3E /* DiscoveryPresentationModel.swift */; };
+		DA32779F2658793600BB1C3E /* HorizontalCliqCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA32779E2658793600BB1C3E /* HorizontalCliqCardView.swift */; };
+		DA3277A2265880C700BB1C3E /* HorizontalCliqCardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277A1265880C700BB1C3E /* HorizontalCliqCardFactory.swift */; };
+		DA3277A42658859000BB1C3E /* NotificationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277A32658859000BB1C3E /* NotificationCard.swift */; };
+		DA3277A826588AAF00BB1C3E /* NSAtttributedString+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277A726588AAF00BB1C3E /* NSAtttributedString+Additions.swift */; };
+		DA3277AA26588B5800BB1C3E /* AccountSettingsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277A926588B5800BB1C3E /* AccountSettingsCard.swift */; };
+		DA3277AC265891DD00BB1C3E /* UIModelCardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277AB265891DD00BB1C3E /* UIModelCardFactory.swift */; };
+		DA3277B02659465300BB1C3E /* UserCliqDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277AF2659465300BB1C3E /* UserCliqDataRepository.swift */; };
+		DA3277B226595D4F00BB1C3E /* CliqDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277B126595D4F00BB1C3E /* CliqDataModel.swift */; };
+		DA3277B52659851200BB1C3E /* UserCliqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277B42659851200BB1C3E /* UserCliqViewController.swift */; };
+		DA3277B7265990BE00BB1C3E /* UserCliqCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277B6265990BE00BB1C3E /* UserCliqCard.swift */; };
+		DA3277B926599B3100BB1C3E /* UserCliqDisplayDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277B826599B3100BB1C3E /* UserCliqDisplayDataSource.swift */; };
+		DA3277BB26599E9900BB1C3E /* UserCliqPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277BA26599E9900BB1C3E /* UserCliqPresentationModel.swift */; };
+		DA3277BD2659A98E00BB1C3E /* UserCliqModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277BC2659A98E00BB1C3E /* UserCliqModelMapper.swift */; };
+		DA3277BF2659EB6E00BB1C3E /* UserCliqsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA3277BE2659EB6E00BB1C3E /* UserCliqsViewModel.swift */; };
 		DA765D902650ABF700E898FF /* ProximalCliqModelMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765D8F2650ABF700E898FF /* ProximalCliqModelMapper.swift */; };
 		DA765D932651139F00E898FF /* FloqDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765D922651139F00E898FF /* FloqDIContainer.swift */; };
 		DA765D962651187600E898FF /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765D952651187600E898FF /* ViewModelFactory.swift */; };
@@ -150,6 +165,14 @@
 		DA765D9E26513F1E00E898FF /* DiscoveryCardFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA765D9D26513F1E00E898FF /* DiscoveryCardFactory.swift */; };
 		DA84356726500F6700FD0A4E /* ProximalCliqEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84356626500F6700FD0A4E /* ProximalCliqEngine.swift */; };
 		DA84356A26501A9300FD0A4E /* ProximalCliqDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA84356926501A9300FD0A4E /* ProximalCliqDataModel.swift */; };
+		DA9470632663CA9A00567A59 /* EmptyUserCliqView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9470622663CA9A00567A59 /* EmptyUserCliqView.swift */; };
+		DA9470662664158E00567A59 /* CreateCliqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9470652664158E00567A59 /* CreateCliqViewController.swift */; };
+		DA947068266416BA00567A59 /* UIImageView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA947067266416BA00567A59 /* UIImageView+Additions.swift */; };
+		DA94706A2664492B00567A59 /* CreateCliqViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9470692664492B00567A59 /* CreateCliqViewModel.swift */; };
+		DA94706C26644A0200567A59 /* CreateCliqDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA94706B26644A0200567A59 /* CreateCliqDataRepository.swift */; };
+		DA94706E26644A3D00567A59 /* CreateCliqDatamodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA94706D26644A3D00567A59 /* CreateCliqDatamodel.swift */; };
+		DA94707026644E6A00567A59 /* CreateCliqPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA94706F26644E6A00567A59 /* CreateCliqPresentationModel.swift */; };
+		DA94707226644ED000567A59 /* CreateCliqMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA94707126644ED000567A59 /* CreateCliqMapper.swift */; };
 		DAC642C22647815A00A2B3CF /* CellsAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC642B82647815A00A2B3CF /* CellsAnimations.swift */; };
 		DAC642C32647815A00A2B3CF /* AnimatorCollectionTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC642B92647815A00A2B3CF /* AnimatorCollectionTable.swift */; };
 		DAC642C42647815A00A2B3CF /* CellsExtensionAnimators.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC642BA2647815A00A2B3CF /* CellsExtensionAnimators.swift */; };
@@ -180,7 +203,7 @@
 		DAC64300264833F100A2B3CF /* GetProximalCliqsUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC642FF264833F100A2B3CF /* GetProximalCliqsUseCase.swift */; };
 		DAC64302264834A900A2B3CF /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC64301264834A900A2B3CF /* AppError.swift */; };
 		DAC64307264835F500A2B3CF /* ProximalCliqRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC64306264835F500A2B3CF /* ProximalCliqRepository.swift */; };
-		DAC6430B264839A100A2B3CF /* ProximalCliqRepsotory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6430A264839A100A2B3CF /* ProximalCliqRepsotory.swift */; };
+		DAC6430B264839A100A2B3CF /* UserDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6430A264839A100A2B3CF /* UserDataRepository.swift */; };
 		DAC6430E264839DD00A2B3CF /* ProximalCliqRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAC6430D264839DD00A2B3CF /* ProximalCliqRemoteDataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -355,6 +378,21 @@
 		DA17878126515ED800B42EE3 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		DA1787832651638000B42EE3 /* String+Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localize.swift"; sourceTree = "<group>"; };
 		DA178787265167D700B42EE3 /* PassthroughView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughView.swift; sourceTree = "<group>"; };
+		DA32779B265876B800BB1C3E /* DiscoveryPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryPresentationModel.swift; sourceTree = "<group>"; };
+		DA32779E2658793600BB1C3E /* HorizontalCliqCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCliqCardView.swift; sourceTree = "<group>"; };
+		DA3277A1265880C700BB1C3E /* HorizontalCliqCardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCliqCardFactory.swift; sourceTree = "<group>"; };
+		DA3277A32658859000BB1C3E /* NotificationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCard.swift; sourceTree = "<group>"; };
+		DA3277A726588AAF00BB1C3E /* NSAtttributedString+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAtttributedString+Additions.swift"; sourceTree = "<group>"; };
+		DA3277A926588B5800BB1C3E /* AccountSettingsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsCard.swift; sourceTree = "<group>"; };
+		DA3277AB265891DD00BB1C3E /* UIModelCardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIModelCardFactory.swift; sourceTree = "<group>"; };
+		DA3277AF2659465300BB1C3E /* UserCliqDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCliqDataRepository.swift; sourceTree = "<group>"; };
+		DA3277B126595D4F00BB1C3E /* CliqDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CliqDataModel.swift; sourceTree = "<group>"; };
+		DA3277B42659851200BB1C3E /* UserCliqViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCliqViewController.swift; sourceTree = "<group>"; };
+		DA3277B6265990BE00BB1C3E /* UserCliqCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCliqCard.swift; sourceTree = "<group>"; };
+		DA3277B826599B3100BB1C3E /* UserCliqDisplayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCliqDisplayDataSource.swift; sourceTree = "<group>"; };
+		DA3277BA26599E9900BB1C3E /* UserCliqPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCliqPresentationModel.swift; sourceTree = "<group>"; };
+		DA3277BC2659A98E00BB1C3E /* UserCliqModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCliqModelMapper.swift; sourceTree = "<group>"; };
+		DA3277BE2659EB6E00BB1C3E /* UserCliqsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCliqsViewModel.swift; sourceTree = "<group>"; };
 		DA765D8F2650ABF700E898FF /* ProximalCliqModelMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCliqModelMapper.swift; sourceTree = "<group>"; };
 		DA765D922651139F00E898FF /* FloqDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FloqDIContainer.swift; path = Floq/Redesign/Data/FloqDIContainer.swift; sourceTree = SOURCE_ROOT; };
 		DA765D952651187600E898FF /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
@@ -364,6 +402,14 @@
 		DA765D9D26513F1E00E898FF /* DiscoveryCardFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryCardFactory.swift; sourceTree = "<group>"; };
 		DA84356626500F6700FD0A4E /* ProximalCliqEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCliqEngine.swift; sourceTree = "<group>"; };
 		DA84356926501A9300FD0A4E /* ProximalCliqDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCliqDataModel.swift; sourceTree = "<group>"; };
+		DA9470622663CA9A00567A59 /* EmptyUserCliqView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyUserCliqView.swift; sourceTree = "<group>"; };
+		DA9470652664158E00567A59 /* CreateCliqViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCliqViewController.swift; sourceTree = "<group>"; };
+		DA947067266416BA00567A59 /* UIImageView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Additions.swift"; sourceTree = "<group>"; };
+		DA9470692664492B00567A59 /* CreateCliqViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCliqViewModel.swift; sourceTree = "<group>"; };
+		DA94706B26644A0200567A59 /* CreateCliqDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCliqDataRepository.swift; sourceTree = "<group>"; };
+		DA94706D26644A3D00567A59 /* CreateCliqDatamodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCliqDatamodel.swift; sourceTree = "<group>"; };
+		DA94706F26644E6A00567A59 /* CreateCliqPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCliqPresentationModel.swift; sourceTree = "<group>"; };
+		DA94707126644ED000567A59 /* CreateCliqMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCliqMapper.swift; sourceTree = "<group>"; };
 		DAC642B82647815A00A2B3CF /* CellsAnimations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsAnimations.swift; sourceTree = "<group>"; };
 		DAC642B92647815A00A2B3CF /* AnimatorCollectionTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatorCollectionTable.swift; sourceTree = "<group>"; };
 		DAC642BA2647815A00A2B3CF /* CellsExtensionAnimators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellsExtensionAnimators.swift; sourceTree = "<group>"; };
@@ -393,7 +439,7 @@
 		DAC642FF264833F100A2B3CF /* GetProximalCliqsUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProximalCliqsUseCase.swift; sourceTree = "<group>"; };
 		DAC64301264834A900A2B3CF /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		DAC64306264835F500A2B3CF /* ProximalCliqRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCliqRepository.swift; sourceTree = "<group>"; };
-		DAC6430A264839A100A2B3CF /* ProximalCliqRepsotory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCliqRepsotory.swift; sourceTree = "<group>"; };
+		DAC6430A264839A100A2B3CF /* UserDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataRepository.swift; sourceTree = "<group>"; };
 		DAC6430D264839DD00A2B3CF /* ProximalCliqRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProximalCliqRemoteDataSource.swift; sourceTree = "<group>"; };
 		E6A77040C1D68B70EBD85130 /* Pods-Floq.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Floq.release.xcconfig"; path = "Target Support Files/Pods-Floq/Pods-Floq.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -897,6 +943,46 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		DA32779A2658769500BB1C3E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				DA32779B265876B800BB1C3E /* DiscoveryPresentationModel.swift */,
+				DA3277BA26599E9900BB1C3E /* UserCliqPresentationModel.swift */,
+				DA94706F26644E6A00567A59 /* CreateCliqPresentationModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DA32779D2658771600BB1C3E /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				DA765D8F2650ABF700E898FF /* ProximalCliqModelMapper.swift */,
+				DA3277BC2659A98E00BB1C3E /* UserCliqModelMapper.swift */,
+				DA94707126644ED000567A59 /* CreateCliqMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		DA3277A02658809A00BB1C3E /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				DA765D9D26513F1E00E898FF /* DiscoveryCardFactory.swift */,
+				DA3277A1265880C700BB1C3E /* HorizontalCliqCardFactory.swift */,
+				DA3277AB265891DD00BB1C3E /* UIModelCardFactory.swift */,
+			);
+			path = Factories;
+			sourceTree = "<group>";
+		};
+		DA3277B3265984FA00BB1C3E /* UserCliq */ = {
+			isa = PBXGroup;
+			children = (
+				DA3277B42659851200BB1C3E /* UserCliqViewController.swift */,
+				DA3277B826599B3100BB1C3E /* UserCliqDisplayDataSource.swift */,
+				DA9470622663CA9A00567A59 /* EmptyUserCliqView.swift */,
+			);
+			path = UserCliq;
+			sourceTree = "<group>";
+		};
 		DA765D912651136900E898FF /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -919,8 +1005,18 @@
 			isa = PBXGroup;
 			children = (
 				DA84356926501A9300FD0A4E /* ProximalCliqDataModel.swift */,
+				DA3277B126595D4F00BB1C3E /* CliqDataModel.swift */,
+				DA94706D26644A3D00567A59 /* CreateCliqDatamodel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		DA9470642664157100567A59 /* CreateCliq */ = {
+			isa = PBXGroup;
+			children = (
+				DA9470652664158E00567A59 /* CreateCliqViewController.swift */,
+			);
+			path = CreateCliq;
 			sourceTree = "<group>";
 		};
 		DAC642B52647813600A2B3CF /* Redesign */ = {
@@ -983,6 +1079,8 @@
 				DAC642DB2647846F00A2B3CF /* UIView+Additions.swift */,
 				DAC642DD2647850100A2B3CF /* UICollectionView+Dequeue.swift */,
 				DA1787832651638000B42EE3 /* String+Localize.swift */,
+				DA3277A726588AAF00BB1C3E /* NSAtttributedString+Additions.swift */,
+				DA947067266416BA00567A59 /* UIImageView+Additions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1018,8 +1116,11 @@
 		DAC642E6264786CC00A2B3CF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				DA3277BE2659EB6E00BB1C3E /* UserCliqsViewModel.swift */,
+				DA32779D2658771600BB1C3E /* Mappers */,
 				DAC642EE2647894800A2B3CF /* Home */,
 				DAC642E7264786D800A2B3CF /* Core */,
+				DA9470692664492B00567A59 /* CreateCliqViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1035,6 +1136,8 @@
 		DAC642EA2647883C00A2B3CF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				DA9470642664157100567A59 /* CreateCliq */,
+				DA3277B3265984FA00BB1C3E /* UserCliq */,
 				DAC642F1264808BC00A2B3CF /* Components */,
 				DAC642ED2647893A00A2B3CF /* Home */,
 			);
@@ -1052,9 +1155,9 @@
 		DAC642EE2647894800A2B3CF /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DA32779A2658769500BB1C3E /* Models */,
 				DAC642EF2647895A00A2B3CF /* FloqHomeViewModel.swift */,
 				DAC642F826482D3C00A2B3CF /* DiscoveryCardViewModel.swift */,
-				DA765D8F2650ABF700E898FF /* ProximalCliqModelMapper.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1062,9 +1165,13 @@
 		DAC642F1264808BC00A2B3CF /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				DA3277A02658809A00BB1C3E /* Factories */,
 				DAC642F2264808E800A2B3CF /* DiscoveryCardView.swift */,
-				DA765D9D26513F1E00E898FF /* DiscoveryCardFactory.swift */,
 				DA178787265167D700B42EE3 /* PassthroughView.swift */,
+				DA32779E2658793600BB1C3E /* HorizontalCliqCardView.swift */,
+				DA3277A32658859000BB1C3E /* NotificationCard.swift */,
+				DA3277A926588B5800BB1C3E /* AccountSettingsCard.swift */,
+				DA3277B6265990BE00BB1C3E /* UserCliqCard.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1124,7 +1231,9 @@
 		DAC643092648389400A2B3CF /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				DAC6430A264839A100A2B3CF /* ProximalCliqRepsotory.swift */,
+				DAC6430A264839A100A2B3CF /* UserDataRepository.swift */,
+				DA3277AF2659465300BB1C3E /* UserCliqDataRepository.swift */,
+				DA94706B26644A0200567A59 /* CreateCliqDataRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1517,6 +1626,7 @@
 				3D072C72242ED18B0088E226 /* ImageProcess.swift in Sources */,
 				38CFAB192288B8AD00D40330 /* FloatyDelegate.swift in Sources */,
 				C48BEDA821F8F6EA00D0A4F7 /* Core.swift in Sources */,
+				DA947068266416BA00567A59 /* UIImageView+Additions.swift in Sources */,
 				40FED65F1FDE0E4800EC5974 /* PhotoItem.swift in Sources */,
 				DA765D962651187600E898FF /* ViewModelFactory.swift in Sources */,
 				3877A9FE22E3536A007FBCE3 /* LoadMoreCells.swift in Sources */,
@@ -1529,8 +1639,10 @@
 				DAC642F3264808E800A2B3CF /* DiscoveryCardView.swift in Sources */,
 				383352222282E80600DA6857 /* Subscriptions.swift in Sources */,
 				DA765D98265118A600E898FF /* DependencyFactory.swift in Sources */,
+				DA9470632663CA9A00567A59 /* EmptyUserCliqView.swift in Sources */,
 				DAC642C82647815A00A2B3CF /* CardContainerViewController.swift in Sources */,
 				3D072C6F242ED0DC0088E226 /* PhotoEmptyView.swift in Sources */,
+				DA32779C265876B800BB1C3E /* DiscoveryPresentationModel.swift in Sources */,
 				DAC642D8264783C700A2B3CF /* Opereators.swift in Sources */,
 				C4D1E09121D8ADDD00C5ED9A /* LoggerService.swift in Sources */,
 				C434C50B21DBA9DB003333A1 /* FIRStorage+Extensions.swift in Sources */,
@@ -1538,6 +1650,7 @@
 				C4D1E09921DB98D200C5ED9A /* UserSettingsTVC.swift in Sources */,
 				C43B8D57220073EB003B7A00 /* NotificationAlertView.swift in Sources */,
 				38CF259222DD4FD1008BEDDF /* CommentEngine.swift in Sources */,
+				DA3277B926599B3100BB1C3E /* UserCliqDisplayDataSource.swift in Sources */,
 				DAC642DE2647850100A2B3CF /* UICollectionView+Dequeue.swift in Sources */,
 				DA1787842651638000B42EE3 /* String+Localize.swift in Sources */,
 				C4A2A42421A22A10006DFE6E /* GridPhotoSection.swift in Sources */,
@@ -1545,6 +1658,8 @@
 				C4A28E4321E01EBB00ADA02D /* ActiveSectionCell.swift in Sources */,
 				C48A57D821A22E0900D3B0E6 /* CliqEngine.swift in Sources */,
 				3D072C74242ED1CB0088E226 /* App.swift in Sources */,
+				DA3277BD2659A98E00BB1C3E /* UserCliqModelMapper.swift in Sources */,
+				DA32779F2658793600BB1C3E /* HorizontalCliqCardView.swift in Sources */,
 				388D51C32305825000BF6BCE /* GFGeoHash.m in Sources */,
 				C45CE27A21E0E2630071C59D /* HomeOnBaordVC.swift in Sources */,
 				3D072C8224300BE90088E226 /* CliqMessageBoardVC.swift in Sources */,
@@ -1565,6 +1680,7 @@
 				38CFAB1C2288B8AD00D40330 /* FloatyViewController.swift in Sources */,
 				DA765D902650ABF700E898FF /* ProximalCliqModelMapper.swift in Sources */,
 				3D072C8424300C270088E226 /* MessageBoardView.swift in Sources */,
+				DA3277B52659851200BB1C3E /* UserCliqViewController.swift in Sources */,
 				C434C50F21DBEB48003333A1 /* FirebaseAuth+Extensions.swift in Sources */,
 				C48A57DA21A22E4400D3B0E6 /* Enums.swift in Sources */,
 				388D51C02305825000BF6BCE /* GeoFire.m in Sources */,
@@ -1578,6 +1694,7 @@
 				C41EBFB021E145430094EBC6 /* LoginVC.swift in Sources */,
 				C4A2A42E21A22BBE006DFE6E /* BaseButton.swift in Sources */,
 				3D072C64242ECAA70088E226 /* Floq.xcdatamodeld in Sources */,
+				DA94706A2664492B00567A59 /* CreateCliqViewModel.swift in Sources */,
 				385F7F15242D903D004CCB88 /* TabView.swift in Sources */,
 				DAC642F926482D3C00A2B3CF /* DiscoveryCardViewModel.swift in Sources */,
 				C4A2A42821A22B37006DFE6E /* FLUser.swift in Sources */,
@@ -1585,7 +1702,10 @@
 				C4D1E08C21D794D400C5ED9A /* NearbyCliqsVC.swift in Sources */,
 				3D072C7C242F339F0088E226 /* PhotoSideBar.swift in Sources */,
 				38D007C823BA742E001899A0 /* RootEntryVC.swift in Sources */,
+				DA94706C26644A0200567A59 /* CreateCliqDataRepository.swift in Sources */,
+				DA94706E26644A3D00567A59 /* CreateCliqDatamodel.swift in Sources */,
 				DAC6430E264839DD00A2B3CF /* ProximalCliqRemoteDataSource.swift in Sources */,
+				DA3277AC265891DD00BB1C3E /* UIModelCardFactory.swift in Sources */,
 				C4D1E09321D8AE4100C5ED9A /* FoundationTypes+Extensions.swift in Sources */,
 				382C2BDB23711F790061AA6E /* CommentNotifier.swift in Sources */,
 				3877AA0122E361A4007FBCE3 /* SmartAlertView.swift in Sources */,
@@ -1594,6 +1714,7 @@
 				385811AF23BBA947002CC9B0 /* GradientView.swift in Sources */,
 				C4A28E4021E01D3000ADA02D /* ActiveSectionController.swift in Sources */,
 				C434C51121DCBE33003333A1 /* MyCliqsVC.swift in Sources */,
+				DA3277BB26599E9900BB1C3E /* UserCliqPresentationModel.swift in Sources */,
 				C4A2A43B21A22C4A006DFE6E /* FullScreenCell.swift in Sources */,
 				C45CE27421E0CD7C0071C59D /* OnBoardingPVC.swift in Sources */,
 				38CC9EBA22EF050C00483DC7 /* CommentsInputView.swift in Sources */,
@@ -1604,6 +1725,7 @@
 				40A1F74D20F3082800DDA0B1 /* ImagePickerController.swift in Sources */,
 				DA84356A26501A9300FD0A4E /* ProximalCliqDataModel.swift in Sources */,
 				DA765D9E26513F1E00E898FF /* DiscoveryCardFactory.swift in Sources */,
+				DA9470662664158E00567A59 /* CreateCliqViewController.swift in Sources */,
 				DAC64300264833F100A2B3CF /* GetProximalCliqsUseCase.swift in Sources */,
 				DAC642CD2647830F00A2B3CF /* ViewWrapperCell.swift in Sources */,
 				38D007CC23BAD492001899A0 /* AuthenticationVC.swift in Sources */,
@@ -1624,12 +1746,16 @@
 				C4A2A42621A22AA8006DFE6E /* FullScreenPhotoSection.swift in Sources */,
 				38CFAB1B2288B8AD00D40330 /* UIView+Draggable.swift in Sources */,
 				C4D1E08921D7894500C5ED9A /* FloqCell.swift in Sources */,
+				DA3277A826588AAF00BB1C3E /* NSAtttributedString+Additions.swift in Sources */,
 				388D51C12305825000BF6BCE /* GFGeoHashQuery.m in Sources */,
+				DA3277A42658859000BB1C3E /* NotificationCard.swift in Sources */,
+				DA3277B02659465300BB1C3E /* UserCliqDataRepository.swift in Sources */,
 				DA765D9A265118B700E898FF /* ViewControllerFactory.swift in Sources */,
 				C4A944FB2204EE3000D40C44 /* Firestore+Extensions.swift in Sources */,
 				38022760227D33F0004C3DF6 /* EULAVC.swift in Sources */,
 				DA765D9C26511B5900E898FF /* LocationManager.swift in Sources */,
-				DAC6430B264839A100A2B3CF /* ProximalCliqRepsotory.swift in Sources */,
+				DA3277AA26588B5800BB1C3E /* AccountSettingsCard.swift in Sources */,
+				DAC6430B264839A100A2B3CF /* UserDataRepository.swift in Sources */,
 				C430B79121E100E70010F2AE /* FinalOnBoardVC.swift in Sources */,
 				40A1F74F20F3083A00DDA0B1 /* ImageRow.swift in Sources */,
 				C4A2A43921A22C4A006DFE6E /* CliqsCell.swift in Sources */,
@@ -1646,10 +1772,15 @@
 				38A5556123C8AC4A0064268E /* Identity.swift in Sources */,
 				DAC642F526480CF600A2B3CF /* UIStackView+Additions.swift in Sources */,
 				407997FB1FDCDF8900AAE42A /* PhotosVC.swift in Sources */,
+				DA94707026644E6A00567A59 /* CreateCliqPresentationModel.swift in Sources */,
 				DAC642C42647815A00A2B3CF /* CellsExtensionAnimators.swift in Sources */,
+				DA3277B7265990BE00BB1C3E /* UserCliqCard.swift in Sources */,
+				DA3277B226595D4F00BB1C3E /* CliqDataModel.swift in Sources */,
 				3D072C8724300DB00088E226 /* CommentAlternateCell.swift in Sources */,
+				DA3277BF2659EB6E00BB1C3E /* UserCliqsViewModel.swift in Sources */,
 				DAC642C32647815A00A2B3CF /* AnimatorCollectionTable.swift in Sources */,
 				C45CE27621E0CE930071C59D /* OnBoardInfoOneVC.swift in Sources */,
+				DA94707226644ED000567A59 /* CreateCliqMapper.swift in Sources */,
 				DAC64302264834A900A2B3CF /* AppError.swift in Sources */,
 				DAC642C52647815A00A2B3CF /* PagedHorizontalCardContainerFactory.swift in Sources */,
 				3D072C7A242EE2A80088E226 /* Insetable.swift in Sources */,
@@ -1659,6 +1790,7 @@
 				C4D1E09521DA7E2E00C5ED9A /* SectionableCliq.swift in Sources */,
 				DAC642C22647815A00A2B3CF /* CellsAnimations.swift in Sources */,
 				DAC642F02647895A00A2B3CF /* FloqHomeViewModel.swift in Sources */,
+				DA3277A2265880C700BB1C3E /* HorizontalCliqCardFactory.swift in Sources */,
 				DA765D932651139F00E898FF /* FloqDIContainer.swift in Sources */,
 				3895DCFD22183FD6009C5CA6 /* SocialSharing.swift in Sources */,
 			);

@@ -18,11 +18,32 @@ class ViewModelFactory{
     }
     
     func floqHomeViewModel(
-        discoveryViewModel: DiscoveryCardViewModel
+        discoveryViewModel: DiscoveryCardViewModel,
+        userRepository: UserDataRepository,
+        userCliqRepository: UserCliqDataRepository
     ) -> FloqHomeViewModelProtocol {
         FloqHomeViewModel(
             dependencies: .init(
-                discoveryViewModel: discoveryViewModel)
+                discoveryViewModel: discoveryViewModel,
+                userRepository: userRepository,
+                userCliqRepository: userCliqRepository
+            )
+        )
+    }
+    
+    func userCliqViewModel(
+        userCliqRepository: UserCliqDataRepository
+    ) -> UserCliqViewModelProtocol {
+        UserCliqsViewModel(userRepository: userCliqRepository)
+    }
+    
+    func createCliqViewModel(
+        repository: CreateCliqDataRepository,
+        locationManager: LocationManager
+    ) -> CreateCliqViewModelProtocol {
+        CreateCliqViewModel(
+            repository: repository,
+            locationManager: locationManager
         )
     }
 }

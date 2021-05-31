@@ -7,7 +7,7 @@ public extension UILabel {
         textColor: UIColor,
         alignment: NSTextAlignment = .natural,
         numberOfLines: Int = .zero,
-        lineBreakMode: NSLineBreakMode = .byCharWrapping,
+        lineBreakMode: NSLineBreakMode = .byWordWrapping,
         adjustsFontSizeToFitWidth: Bool = false
     ) -> UILabel {
         let label = UILabel()

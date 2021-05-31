@@ -10,3 +10,20 @@
 "cliqs_plural" = "cliqs";
 "cliqs_singular" = "cliq";
 "home_title" = "Floq";
+"home_empty_cliq" = "Create or join your first  cliq";
+"my_cliqs" = "My Cliqs";
+"notification_singular" = "notification";
+"notification_plural" = "notifications";
+"account_settings" = "Account Settings";
+"cliq_follower" = "follower";
+"cliq_followers" = "followers";
+
+"empty_cliq_info" = "This is where all the cliqs you have created and joined will be accessed.\n\nGet started by creating your own cliq or joining one today.";
+
+"create_cliq_add_cover" = "Tap to add a cover photo";
+
+"create_cliq_notice_info" = "Nearby users can find this cliq in the Near Me Section\n\n\nAfter 12 hours it will no longer be discoverable, but will be accessible in the My Cliqs section.";
+
+"create_cliq_button_create" = "Create";
+"create_cliq_title" = "Create Cliq";
+"create_cliq_placeholder" = "Name your cliq…";

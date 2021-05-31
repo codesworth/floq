@@ -11,4 +11,14 @@ import Foundation
 class DependencyFactory{
     
     func proximalCliqRemoteDatasource() -> ProximalCliqRemoteDataSource { .init() }
+    
+    func userDataRepository() -> UserDataRepository { .init() }
+    
+    func userCliqDataRepository(uid: String) -> UserCliqDataRepository {
+        .init(uid: uid)
+    }
+    
+    func createCliqDataRepository(uid: String) -> CreateCliqDataRepository {
+        .init(uid: uid)
+    }
 }
